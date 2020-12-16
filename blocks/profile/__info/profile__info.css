@@ -1,0 +1,5 @@
+.profile__info {
+  position: relative;
+  border: 1px solid red;
+  align-self: center;
+}

@@ -1,0 +1,4 @@
+.popup-toggle {
+  display: flex;
+  transition: display 2s linear;
+}

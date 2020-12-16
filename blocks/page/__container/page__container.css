@@ -1,4 +1,12 @@
+h1, h2, h3, div, img, p, section, span, ul, li, a, header, footer {
+  border: 1px solid red;
+}
+
 .page__container {
   max-width: 1280px;
   margin: 0 auto;
+  font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

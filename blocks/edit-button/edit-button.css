@@ -1,0 +1,11 @@
+.edit-button {
+  position: absolute;
+  top: 6px;
+  right: -35px;
+
+}
+
+.edit-button:hover {
+  opacity: .7;
+  cursor: pointer;
+}
