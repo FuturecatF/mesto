@@ -2,10 +2,11 @@
   position: absolute;
   top: -30px;
   right: -30px;
-  transform: rotate(45deg);
+
   cursor: pointer;
 }
 
 .popup__close:hover {
   opacity: .7;
 }
+

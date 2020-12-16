@@ -1,6 +1,6 @@
-h1, h2, h3, div, img, p, section, span, ul, li, a, header, footer {
+/* h1, h2, h3, div, img, p, section, span, ul, li, a, header, footer {
   border: 1px solid red;
-}
+} */
 
 .page__container {
   max-width: 1280px;

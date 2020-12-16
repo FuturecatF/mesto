@@ -24,6 +24,13 @@
 @import url('../blocks/edit-button/edit-button.css');
 @import url('../blocks/add-button/add-button.css');
 
+@import url('../blocks/elements/elements.css');
+@import url('../blocks/element/element.css');
+@import url('../blocks/element/__photo/element__photo.css');
+@import url('../blocks/element/__footer/element__footer.css');
+@import url('../blocks/element/__subtitle/element__subtitle.css');
+@import url('../blocks/element/__like/element__like.css');
+
 
 
 
