@@ -7,6 +7,7 @@ let profileSubtitle = document.querySelector('.profile__subtitle');
 let popupJob = document.querySelector('.popup__job');
 let popupForm = document.querySelector('.popup__form');
 let popupButton = document.querySelector('.popup__button');
+let likeButton = document.querySelector('.element__like ');
 
 function togglePopup() {
   popup.classList.toggle('popup-toggle');
@@ -37,11 +38,21 @@ function takePlaceholder() {
 }
 
 function inputText() {
-  popupButton.classList.toggle('popup__button_btn_active');
 
+  popupButton.classList.add('popup__button_btn_active');
+
+}
+
+function likeActivated() {
+  if (likeButton.classList.contains('element__like_active') !== true) {
+  likeButton.classList.add('element__like_active');
+  } else {
+    likeButton.classList.remove('element__like_active');
+  }
 }
 
 editButton.addEventListener('click', togglePopup);
 popupClose.addEventListener('click', togglePopup);
 popupForm.addEventListener('submit', handleFormSubmit);
 popupForm.addEventListener('input', inputText);
+likeButton.addEventListener('click', likeActivated);

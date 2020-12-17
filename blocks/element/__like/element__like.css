@@ -1,7 +1,13 @@
 .element__like {
   cursor: pointer;
-  width: 21px;
-  height: 18px;
+  background-image: url(../../../images/like.svg);
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: 50%;
+  width: 24px;
+  height: 19px;
+  outline: 0;
+  border: none;
   margin-right: 22px;
   align-self: center;
 }
