@@ -1,0 +1,11 @@
+.popup__button_btn_active {
+  background-color: #000000;
+}
+
+.popup__button_btn_active:hover {
+  opacity: .8;
+}
+
+.popup__button_btn_active:focus {
+  opacity: .8;
+}

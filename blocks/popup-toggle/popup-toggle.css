@@ -1,4 +1,4 @@
 .popup-toggle {
-  display: flex;
-  transition: all 1s linear;
+  visibility: visible;
+  transition: visibility 5s linear;
 }

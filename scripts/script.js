@@ -6,6 +6,7 @@ let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
 let popupJob = document.querySelector('.popup__job');
 let popupForm = document.querySelector('.popup__form');
+let popupButton = document.querySelector('.popup__button');
 
 function togglePopup() {
   popup.classList.toggle('popup-toggle');
@@ -35,7 +36,12 @@ function takePlaceholder() {
   togglePopup();
 }
 
+function inputText() {
+  popupButton.classList.toggle('popup__button_btn_active');
+
+}
+
 editButton.addEventListener('click', togglePopup);
 popupClose.addEventListener('click', togglePopup);
 popupForm.addEventListener('submit', handleFormSubmit);
-
+popupForm.addEventListener('input', inputText);

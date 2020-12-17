@@ -8,6 +8,7 @@
   justify-self: flex-end;
   margin-left: auto;
   align-self: center;
+  outline: 0;
   border: 2px solid #FFFFFF;
 }
 
