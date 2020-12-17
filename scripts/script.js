@@ -13,6 +13,7 @@ function togglePopup() {
   popup.classList.toggle('popup-toggle');
   takePlaceholder();
   clearValue();
+  popupButton.classList.remove('popup__button_btn_active');
 }
 
 function clearValue() {
