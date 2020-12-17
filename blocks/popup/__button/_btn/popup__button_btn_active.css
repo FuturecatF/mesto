@@ -1,5 +1,6 @@
 .popup__button_btn_active {
   background-color: #000000;
+  cursor: pointer;
 }
 
 .popup__button_btn_active:hover {

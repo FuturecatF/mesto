@@ -1,12 +1,12 @@
 .popup__button {
-  width: 358px;
+  max-width: 358px;
+  width: 100%;
   height: 50px;
   align-self: center;
   color: white;
   margin-top: 48px;
   border: none;
   border-radius: 2px;
-  cursor: pointer;
   padding-top: 14px;
   padding-bottom: 18px;
   font-style: normal;
@@ -15,4 +15,11 @@
   line-height: 22px;
   text-align: center;
   outline: 0;
+}
+
+@media screen and (max-width: 425px) {
+  .popup__button {
+    margin-top: 45px;
+    height: 46px;
+  }
 }

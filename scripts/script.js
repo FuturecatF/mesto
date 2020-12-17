@@ -8,6 +8,7 @@ let popupJob = document.querySelector('.popup__job');
 let popupForm = document.querySelector('.popup__form');
 let popupButton = document.querySelector('.popup__button');
 let likeButton = document.querySelector('.element__like ');
+popupButton.setAttribute('disabled', 'вжух');
 
 function togglePopup() {
   popup.classList.toggle('popup-toggle');
@@ -38,11 +39,17 @@ function takePlaceholder() {
   togglePopup();
 }
 
+// разобраться
 function inputText() {
-
+  if (popupName.value !== 0) {
+  popupButton.removeAttribute('disabled', 'вжух');
   popupButton.classList.add('popup__button_btn_active');
-
+  } else {
+    popupButton.setAttribute('disabled', 'вжух');
+    popupButton.classList.remove('popup__button_btn_active');
+  }
 }
+// досюдова
 
 function likeActivated() {
   if (likeButton.classList.contains('element__like_active') !== true) {
@@ -55,5 +62,8 @@ function likeActivated() {
 editButton.addEventListener('click', togglePopup);
 popupClose.addEventListener('click', togglePopup);
 popupForm.addEventListener('submit', handleFormSubmit);
-popupForm.addEventListener('input', inputText);
+
+popupForm.addEventListener('input', inputText); // разобраться
+
 likeButton.addEventListener('click', likeActivated);
+

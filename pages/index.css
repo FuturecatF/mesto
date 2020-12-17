@@ -34,6 +34,7 @@
 @import url('../blocks/popup/__close/popup__close.css');
 
 @import url('../blocks/footer/footer.css');
+@import url('../blocks/footer/__copyright/footer__copyright.css');
 @import url('../blocks/element/__like/_active/element__like_active.css');
 
 

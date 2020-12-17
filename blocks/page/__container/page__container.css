@@ -10,3 +10,16 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@media screen and (max-width: 890px) {
+  .page__container {
+    max-width: 90%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .page__container {
+    max-width: 320px;
+  }
+}
+

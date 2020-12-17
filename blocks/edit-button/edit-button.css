@@ -16,3 +16,11 @@
   opacity: .6;
   cursor: pointer;
 }
+
+@media screen and (max-width: 890px) {
+  .edit-button {
+    width: 18px;
+    height: 18px;
+    right: -30px;
+  }
+}

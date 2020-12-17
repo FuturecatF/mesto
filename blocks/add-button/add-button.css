@@ -17,10 +17,16 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 660px) {
+@media screen and (max-width: 890px) {
   .add-button {
     margin-left: 0;
     margin-top: 36px;
-    width: 100%;
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .add-button {
+    width: 90%;
   }
 }
