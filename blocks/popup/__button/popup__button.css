@@ -10,6 +10,11 @@
   cursor: pointer;
   padding-top: 14px;
   padding-bottom: 18px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
 }
 
 .popup__button:hover {

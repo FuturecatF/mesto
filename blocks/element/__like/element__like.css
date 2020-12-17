@@ -1,9 +1,9 @@
 .element__like {
-  margin-right: 22px;
-  height: 18px;
-  align-self: center;
   cursor: pointer;
-  object-fit: contain;
+  width: 21px;
+  height: 18px;
+  margin-right: 22px;
+  align-self: center;
 }
 
 .element__like:hover {

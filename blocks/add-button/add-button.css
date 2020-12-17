@@ -1,9 +1,14 @@
 .add-button {
+  background-image: url(../../images/add-button.svg);
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: 50%;
   width: 150px;
   height: 50px;
   justify-self: flex-end;
   margin-left: auto;
   align-self: center;
+  border: 2px solid #FFFFFF;
 }
 
 .add-button:hover {
