@@ -8,8 +8,13 @@ let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
 let editButton = document.querySelector('.edit-button');
 let likeButtons = document.querySelectorAll('.element__like');
-popupButton.setAttribute('disabled', 'вжух');
 
+let likeButtonsArray = Array.prototype.slice.call(likeButtons);
+
+let likeActive = document.querySelectorAll('.element__like_active');
+
+popupButton.setAttribute('disabled', 'вжух');
+console.log(likeButtonsArray);
 function togglePopup() {
   popup.classList.toggle('popup-toggle');
   takePlaceholder();
@@ -43,17 +48,14 @@ function inputText() {
   popupButton.classList.add('popup__button_btn_active');
 }
 
-function likeActivated() {
-   if (likeButtons.classList.contains('element__like_active') !== true) {
-    likeButtons.classList.add('element__like_active');
-     } else {
-      likeButtons.classList.remove('element__like_active');
-     }
+
+  for (let i of likeButtons) {
+    addEventListener('click', function() {
+      [i].classList.add('element__like_active');
+    });
 }
 
-for (let i = 0; i < likeButtons.length; i++) {
-  likeButtons[i].addEventListener('click', likeActivated);
-}
+
 
 editButton.addEventListener('click', togglePopup);
 popupClose.addEventListener('click', togglePopup);
