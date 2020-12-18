@@ -26,6 +26,7 @@
 @import url('../blocks/add-button/add-button.css');
 
 @import url('../blocks/elements/elements.css');
+@import url('../blocks/elements/__container/element-container.css');
 @import url('../blocks/element/element.css');
 @import url('../blocks/element/__photo/element__photo.css');
 @import url('../blocks/element/__footer/element__footer.css');
