@@ -8,13 +8,8 @@ let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
 let editButton = document.querySelector('.edit-button');
 let likeButtons = document.querySelectorAll('.element__like');
-
-let likeButtonsArray = Array.prototype.slice.call(likeButtons);
-
-let likeActive = document.querySelectorAll('.element__like_active');
-
 popupButton.setAttribute('disabled', 'вжух');
-console.log(likeButtonsArray);
+
 function togglePopup() {
   popup.classList.toggle('popup-toggle');
   takePlaceholder();
@@ -32,13 +27,13 @@ function takePlaceholder() {
   popupJob.placeholder = profileSubtitle.textContent;
 }
 
-  function handleFormSubmit(evt) {
+function handleFormSubmit(evt) {
   evt.preventDefault();
   if (popupName.value.length > 0) {
-  profileTitle.textContent = popupName.value;
+    profileTitle.textContent = popupName.value;
   }
   if (popupJob.value.length > 0) {
-  profileSubtitle.textContent = popupJob.value;
+    profileSubtitle.textContent = popupJob.value;
   }
   togglePopup();
 }
@@ -49,10 +44,12 @@ function inputText() {
 }
 
 
-  for (let i of likeButtons) {
-    addEventListener('click', function() {
-      [i].classList.add('element__like_active');
-    });
+for (let i = 0; i < likeButtons.length; i++) {
+  likeButtons[i].addEventListener('click', function () {
+    if (!likeButtons[i].classList.contains('element__like_active')) {
+      likeButtons[i].classList.add('element__like_active');
+    } else { likeButtons[i].classList.remove('element__like_active'); }
+  });
 }
 
 
