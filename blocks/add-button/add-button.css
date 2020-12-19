@@ -19,6 +19,9 @@
   }
 }
 @media (hover: none) {
+  .add-button:active {
+    opacity: .7;
+  }
 }
 
 

@@ -12,10 +12,18 @@
   border: 1px solid #FFFFFF;
 }
 
-.edit-button:hover {
-  opacity: .6;
-  cursor: pointer;
+@media (hover: hover) {
+  .edit-button:hover {
+    opacity: .6;
+    cursor: pointer;
+  }
 }
+@media (hover: none) {
+  .edit-button:active {
+    opacity: .6;
+  }
+}
+
 
 @media screen and (max-width: 890px) {
   .edit-button {

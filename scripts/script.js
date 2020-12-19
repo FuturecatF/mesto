@@ -12,7 +12,7 @@ let likeButtons = document.querySelectorAll('.element__like');
 function togglePopup() {
   popup.classList.toggle('popup-toggle');
   takeInputValue();
-  popupButton.classList.remove('popup__button_btn_active');
+  popupButton.classList.remove('popup__button_active');
   popupButton.setAttribute('disabled', 'вжух');
 }
 
@@ -36,7 +36,7 @@ function handleFormSubmit(evt) {
 
 function inputText() {
   popupButton.removeAttribute('disabled', 'вжух');
-  popupButton.classList.add('popup__button_btn_active');
+  popupButton.classList.add('popup__button_active');
 }
 
 for (let i = 0; i < likeButtons.length; i++) {

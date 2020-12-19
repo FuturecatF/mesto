@@ -1,5 +1,5 @@
-.element-container {
-  list-style: none;
+.elements-container {
+  list-style-type: none;
   padding: 0;
   margin: 0;
   display: grid;

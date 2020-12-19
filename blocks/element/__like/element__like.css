@@ -10,7 +10,6 @@
   border: none;
   margin-right: 22px;
   align-self: center;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 @media (hover: hover) {
@@ -19,7 +18,7 @@
   }
 }
 @media (hover: none) {
-  .element__like:target {
+  .element__like:active {
     opacity: .5;
   }
 }
