@@ -1,5 +1,4 @@
 .element__footer {
-  max-width: 282px;
   display: flex;
   justify-content: space-between;
 }
