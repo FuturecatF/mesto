@@ -6,7 +6,7 @@ let popupButton = popupForm.querySelector('.popup__button');
 let popupClose = popup.querySelector('.popup__close');
 let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
-let editButton = document.querySelector('.edit-button');
+let editButton = document.querySelector('.profile__edit-button');
 let likeButtons = document.querySelectorAll('.element__like');
 popupButton.setAttribute('disabled', 'вжух'); // чтобы нельзя было вызвать попап через просмотр кода и сохранить пустые инпуты
 
