@@ -8,12 +8,13 @@ let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
 let editButton = document.querySelector('.edit-button');
 let likeButtons = document.querySelectorAll('.element__like');
+popupButton.setAttribute('disabled', 'вжух'); // чтобы нельзя было вызвать попап через просмотр кода и сохранить пустые инпуты
 
 function togglePopup() {
   popup.classList.toggle('popup-toggle');
   takeInputValue();
-  popupButton.classList.remove('popup__button_active');
   popupButton.setAttribute('disabled', 'вжух');
+  popupButton.classList.remove('popup__button_active');
 }
 
 function takeInputValue() {
@@ -23,21 +24,22 @@ function takeInputValue() {
 
 function handleFormSubmit(evt) {
   evt.preventDefault();
-  if (popupName.value.length > 0) {
-    profileTitle.textContent = popupName.value;
-    inputText();
-  } else {return false; }
-  if (popupJob.value.length > 0) {
-    profileSubtitle.textContent = popupJob.value;
-    inputText();
-  } else {return false; }
-    togglePopup();
+  profileTitle.textContent = popupName.value;
+  profileSubtitle.textContent = popupJob.value;
+  togglePopup();
 }
 
-function inputText() {
-  popupButton.removeAttribute('disabled', 'вжух');
-  popupButton.classList.add('popup__button_active');
+function CheckRegexInput() {
+  let regexp = /^([^\-_\s][A-Za-zА-Яа-яЁё\s_-]{1,45}[^\-_\s])$/i;
+  if (regexp.test(popupName.value) === true && regexp.test(popupJob.value) === true) {
+    popupButton.removeAttribute('disabled', 'вжух');
+    popupButton.classList.add('popup__button_active');
+  } else {
+    popupButton.setAttribute('disabled', 'вжух');
+    popupButton.classList.remove('popup__button_active');
+  }
 }
+
 
 for (let i = 0; i < likeButtons.length; i++) {
   likeButtons[i].addEventListener('click', function () {
@@ -50,4 +52,4 @@ for (let i = 0; i < likeButtons.length; i++) {
 editButton.addEventListener('click', togglePopup);
 popupClose.addEventListener('click', togglePopup);
 popupForm.addEventListener('submit', handleFormSubmit);
-popupForm.addEventListener('input', inputText);
+popupForm.addEventListener('input', CheckRegexInput);

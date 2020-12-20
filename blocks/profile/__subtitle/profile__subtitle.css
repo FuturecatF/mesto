@@ -6,11 +6,27 @@
   font-weight: normal;
   font-size: 18px;
   line-height: 22px;
+  max-width: 320px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 890px) {
   .profile__subtitle {
     font-size: 14px;
     line-height: 17px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .profile__subtitle {
+    max-width: 282px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .profile__subtitle {
+    max-width: 220px;
   }
 }
