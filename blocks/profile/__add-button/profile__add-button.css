@@ -10,17 +10,18 @@
   align-self: center;
   outline: 0;
   border: 2px solid #FFFFFF;
+  border-radius: 2px;
 }
 
 @media (hover: hover) {
   .profile__add-button:hover {
-    opacity: .7;
+    opacity: .6;
     cursor: pointer;
   }
 }
 @media (hover: none) {
   .profile__add-button:active {
-    opacity: .7;
+    opacity: .6;
   }
 }
 

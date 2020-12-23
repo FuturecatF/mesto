@@ -1,11 +1,16 @@
-.popup__job {
+.popup__input {
   padding: 0 0 13px 0;
-  border-style: none;
+  margin-bottom: 30px;
+  border: none;
   outline: none;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
 }
 
-.popup__job:focus {
+.popup__input:last-of-type {
+  margin-bottom: 0;
+}
+
+.popup__input:focus {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, .8);
 }

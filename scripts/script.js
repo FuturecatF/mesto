@@ -1,9 +1,9 @@
 let popup = document.querySelector('.popup');
 let popupForm = popup.querySelector('.popup__form');
-let popupName = popupForm.querySelector('.popup__name');
-let popupJob = popupForm.querySelector('.popup__job');
 let popupButton = popupForm.querySelector('.popup__button');
 let popupClose = popup.querySelector('.popup__close');
+let profileName = document.getElementsByName('profileName');
+let profileJob = document.getElementsByName('profileJob');
 let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
 let editButton = document.querySelector('.profile__edit-button');
@@ -11,27 +11,27 @@ let likeButtons = document.querySelectorAll('.element__like');
 popupButton.setAttribute('disabled', 'вжух'); // чтобы нельзя было вызвать попап через просмотр кода и сохранить пустые инпуты
 
 function togglePopup() {
-  popup.classList.toggle('popup-toggle');
+  popup.classList.toggle('popup_opened');
   takeInputValue();
   popupButton.setAttribute('disabled', 'вжух');
   popupButton.classList.remove('popup__button_active');
 }
 
 function takeInputValue() {
-  popupName.value = profileTitle.textContent;
-  popupJob.value = profileSubtitle.textContent;
+  profileName[0].value = profileTitle.textContent;
+  profileJob[0].value = profileSubtitle.textContent;
 }
 
 function handleFormSubmit(evt) {
   evt.preventDefault();
-  profileTitle.textContent = popupName.value;
-  profileSubtitle.textContent = popupJob.value;
+  profileTitle.textContent = profileName[0].value;
+  profileSubtitle.textContent = profileJob[0].value;
   togglePopup();
 }
 
-function CheckRegexInput() {
-  let regexp = /^([^\-_\s][A-Za-zА-Яа-яЁё\s_-]{1,45}[^\-_\s])$/i;
-  if (regexp.test(popupName.value) === true && regexp.test(popupJob.value) === true) {
+function checkRegexInput() {
+  const regexp = /^([^\-_\s][A-Za-zА-Яа-яЁё\s_-]{1,40}[^\-_\s])$/i;
+  if (regexp.test(profileName[0].value) === true && regexp.test(profileJob[0].value) === true) {
     popupButton.removeAttribute('disabled', 'вжух');
     popupButton.classList.add('popup__button_active');
   } else {
@@ -39,7 +39,6 @@ function CheckRegexInput() {
     popupButton.classList.remove('popup__button_active');
   }
 }
-
 
 for (let i = 0; i < likeButtons.length; i++) {
   likeButtons[i].addEventListener('click', function () {
@@ -52,4 +51,4 @@ for (let i = 0; i < likeButtons.length; i++) {
 editButton.addEventListener('click', togglePopup);
 popupClose.addEventListener('click', togglePopup);
 popupForm.addEventListener('submit', handleFormSubmit);
-popupForm.addEventListener('input', CheckRegexInput);
+popupForm.addEventListener('input', checkRegexInput);
