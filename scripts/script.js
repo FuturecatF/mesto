@@ -7,9 +7,61 @@ let profileJob = document.getElementsByName('profile-job');
 let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
 let editButton = document.querySelector('.profile__edit-button');
-let likeButtons = document.querySelectorAll('.element__like');
-popupButton.setAttribute('disabled', 'вжух'); // чтобы нельзя было вызвать попап через просмотр кода и сохранить пустые инпуты
 
+// Проект 5
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+//Добавляем карточки из массива и лайки
+const elementsContainer = document.querySelector('.elements__container');
+const elementTemplate = elementsContainer.querySelector('#element-template').content;
+
+initialCards.forEach(function (item) {
+const element = elementTemplate.cloneNode(true);
+element.querySelector('.element__subtitle').textContent = item.name;
+element.querySelector('.element__photo').src = item.link;
+
+const likeButton = element.querySelector('.element__like');
+likeButton.addEventListener('click', function (evt) {
+  if (evt.target) {
+    likeButton.classList.toggle('element__like_active');
+  }
+});
+
+elementsContainer.append(element);
+});
+
+
+
+
+
+
+
+// Конец проекта 5
 function togglePopup() {
   popup.classList.toggle('popup_opened');
   takeInputValue();
@@ -40,13 +92,7 @@ function checkRegexInput() {
   }
 }
 
-for (let i = 0; i < likeButtons.length; i++) {
-  likeButtons[i].addEventListener('click', function () {
-    if (!likeButtons[i].classList.contains('element__like_active')) {
-      likeButtons[i].classList.add('element__like_active');
-    } else { likeButtons[i].classList.remove('element__like_active'); }
-  });
-}
+
 
 editButton.addEventListener('click', togglePopup);
 popupClose.addEventListener('click', togglePopup);
