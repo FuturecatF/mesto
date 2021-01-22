@@ -31,6 +31,15 @@
 @import url('../blocks/popup/__button/_active/popup__button_active.css');
 @import url('../blocks/popup/__close/popup__close.css');
 
+@import url('../blocks/x/x.css');
+@import url('../blocks/x/_opened/x_opened.css');
+@import url('../blocks/x/xo/xo.css');
+@import url('../blocks/photo/photo.css');
+@import url('../blocks/photo/__subtitle/photo__subtitle.css');
+@import url('../blocks/b/b.css');
+
+
+
 
 
 
