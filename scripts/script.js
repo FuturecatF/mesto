@@ -54,20 +54,28 @@ function render() {
   initialCards.forEach(renderCard);
 }
 
-function renderCard(link, name) {
+function getCard(data) {
   const element = elementTemplate.cloneNode(true);
-  element.querySelector('.element__subtitle').textContent = name.name;
-  element.querySelector('.element__photo').src = link.link;
+  element.querySelector('.element__subtitle').textContent = data.name;
+  element.querySelector('.element__photo').src = data.link;
   element.querySelector('.element__like').addEventListener('click', function (evt) {
     evt.target.classList.toggle('element__like_active');
      });
-     elementsContainer.append(element);
-}
+     return element;
 
+}
+function renderCard(data) {
+  elementsContainer.prepend(getCard(data));
+  }
+
+render();
 
 function submitNewCard(evt) {
   evt.preventDefault();
-  renderCard(photoLink[0].value, titleName[0].value);
+  const data = {};
+  data.name = titleName[0].value;
+  data.link = photoLink[0].value;
+  renderCard(data);
   popupAddCard.classList.remove('popup_opened');
 }
 
@@ -85,7 +93,7 @@ function addCardPopupOpened() {
 
 
 
-render();
+
 addCard.addEventListener('click', addCardPopupOpened);
 popupAddCard.addEventListener('submit', submitNewCard);
 
