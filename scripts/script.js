@@ -37,15 +37,61 @@ const initialCards = [
 ];
 
 
-//Добавляем карточки из массива и лайки
-const elementsContainer = document.querySelector('.elements__container');
+
+
 const elementTemplate = document.querySelector('#element-template').content;
+const elementsContainer = document.querySelector('.elements__container');
 const b = document.querySelector('.b');
 const subtitlePhoto = document.querySelector('.photo__subtitle');
 
+const popupAddCard = document.querySelector('.popup_type_new-card');
+const titleName = document.getElementsByName('title-name');
+const photoLink = document.getElementsByName('photo-link');
+const addCard = document.querySelector('.profile__add-button');
 
+
+function render() {
+  initialCards.forEach(renderCard);
+}
+
+function renderCard(data) {
+  const element = elementTemplate.cloneNode(true);
+  element.querySelector('.element__subtitle').textContent = data.name;
+  element.querySelector('.element__photo').src = data.link;
+  element.querySelector('.element__like').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('element__like_active');
+     });
+     elementsContainer.append(element);
+
+}
+
+render();
+
+
+
+ // data.link = photoLink[0].value;
+ // data.name = titleName[0].value;
+
+
+  elementsContainer.prepend(element);
+
+
+function addCardPopupOpened() {
+  popupAddCard.classList.add('popup_opened');
+}
+
+function submitNewCard(evt) {
+  evt.preventDefault();
+  renderCard(data);
+  popupAddCard.classList.remove('popup_opened');
+}
+
+addCard.addEventListener('click', addCardPopupOpened);
+popupAddCard.addEventListener('submit', submitNewCard);
+
+/**
 initialCards.forEach(function (item) {
-const element = elementTemplate.cloneNode(true);
+const element = elementTemplate.cloneNode(true); -->
 element.querySelector('.element__subtitle').textContent = item.name;
 element.querySelector('.element__photo').src = item.link;
 //лайки
@@ -118,6 +164,7 @@ popupAddCard.addEventListener('submit', submitNewCard);
 
 
 // Конец проекта 5
+*/
 function togglePopup() {
   popup.classList.toggle('popup_opened');
   takeInputValue();
