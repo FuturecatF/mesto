@@ -54,38 +54,38 @@ function render() {
   initialCards.forEach(renderCard);
 }
 
-function renderCard(data) {
+function renderCard(link, name) {
   const element = elementTemplate.cloneNode(true);
-  element.querySelector('.element__subtitle').textContent = data.name;
-  element.querySelector('.element__photo').src = data.link;
+  element.querySelector('.element__subtitle').textContent = name.name;
+  element.querySelector('.element__photo').src = link.link;
   element.querySelector('.element__like').addEventListener('click', function (evt) {
     evt.target.classList.toggle('element__like_active');
      });
      elementsContainer.append(element);
-
 }
 
-render();
 
+function submitNewCard(evt) {
+  evt.preventDefault();
+  renderCard(photoLink[0].value, titleName[0].value);
+  popupAddCard.classList.remove('popup_opened');
+}
 
 
  // data.link = photoLink[0].value;
- // data.name = titleName[0].value;
+  //data.name = titleName[0].value;
 
 
-  elementsContainer.prepend(element);
+  // elementsContainer.prepend(element);
 
 
 function addCardPopupOpened() {
   popupAddCard.classList.add('popup_opened');
 }
 
-function submitNewCard(evt) {
-  evt.preventDefault();
-  renderCard(data);
-  popupAddCard.classList.remove('popup_opened');
-}
 
+
+render();
 addCard.addEventListener('click', addCardPopupOpened);
 popupAddCard.addEventListener('submit', submitNewCard);
 
