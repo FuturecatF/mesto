@@ -48,6 +48,7 @@ const popupAddCard = document.querySelector('.popup_type_new-card');
 const titleName = document.getElementsByName('title-name');
 const photoLink = document.getElementsByName('photo-link');
 const addCard = document.querySelector('.profile__add-button');
+const x = document.querySelector('.x');
 
 
 function render() {
@@ -61,22 +62,32 @@ function getCard(data) {
   element.querySelector('.element__like').addEventListener('click', function (evt) {
     evt.target.classList.toggle('element__like_active');
      });
+  element.querySelector('.element__photo').addEventListener('click', function (evt) {
+    x.classList.add('x_opened');
+    b.src = this.src;
+    subtitlePhoto.textContent = data.name;
+       });
      return element;
 
 }
 function renderCard(data) {
-  elementsContainer.prepend(getCard(data));
+  elementsContainer.append(getCard(data));
   }
 
 render();
+
+function renderNewCard(data) {
+  elementsContainer.prepend(getCard(data));
+}
 
 function submitNewCard(evt) {
   evt.preventDefault();
   const data = {};
   data.name = titleName[0].value;
   data.link = photoLink[0].value;
-  renderCard(data);
+  renderNewCard(data);
   popupAddCard.classList.remove('popup_opened');
+  return data;
 }
 
 
