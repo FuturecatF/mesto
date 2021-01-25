@@ -6,7 +6,7 @@ const popupButton = popupForm.querySelector('.popup__button');
 const popupClose = popup.querySelector('.popup__close');
 const popupCloseEdit = document.querySelector('.popup__close_type_edit');
 const popupCloseNewCard = document.querySelector('.popup__close_type_new-card');
-const popupCloseImage = document.querySelector('.popup__close_type_image');
+const photoCloseImage = document.querySelector('.photo__close');
 
 const profileName = document.getElementsByName('profile-name');
 const profileJob = document.getElementsByName('profile-job');
@@ -15,16 +15,16 @@ const profileSubtitle = document.querySelector('.profile__subtitle');
 const editButton = document.querySelector('.profile__edit-button');
 
 function toogleModal(evt) {
-  evt.target.classList.toggle('popup_opened');
+  evt.target.closest('.popup').classList.toggle('popup_opened');
 }
 
 popupCloseEdit.addEventListener('click', toogleModal);
 popupCloseNewCard.addEventListener('click', toogleModal);
-popupCloseImage.addEventListener('click', toogleModal);
+photoCloseImage.addEventListener('click', toogleModal);
 
 
 function togglePopup() {
-  // popupEdit.classList.toggle('popup_opened');
+  popupEdit.classList.toggle('popup_opened');
   takeInputValue();
   popupButton.setAttribute('disabled', 'вжух');
   popupButton.classList.remove('popup__button_active');
@@ -106,20 +106,22 @@ function getCard(data) {
   const element = elementTemplate.cloneNode(true);
   element.querySelector('.element__subtitle').textContent = data.name;
   element.querySelector('.element__photo').src = data.link;
+  element.querySelector('.element__photo').alt = data.name;
   element.querySelector('.element__like').addEventListener('click', function (evt) {
     evt.target.classList.toggle('element__like_active');
-     });
+  });
   element.querySelector('.element__photo').addEventListener('click', function (evt) {
     if (evt.target) {
-    popupPhoto.classList.add('popup_opened');
-    photoItem.src = this.src;
-    subtitlePhoto.textContent = data.name;
+      popupPhoto.classList.add('popup_opened');
+      photoItem.src = this.src;
+      subtitlePhoto.textContent = data.name;
+      photoItem.alt = this.alt;
     }
-       });
+  });
   element.querySelector('.element__delete-icon').addEventListener('click', function (evt) {
-        evt.target.closest('.element').remove();
-           });
-     return element;
+    evt.target.closest('.element').remove();
+  });
+  return element;
 }
 
 function renderCard(data) {

@@ -60,7 +60,7 @@
         <form class="popup__form" name="popup-form">
           <input class="popup__input" type="text" name="title-name" placeholder="Название">
           <input class="popup__input" type="text" name="photo-link" placeholder="Ссылка на картинку">
-          <button class="popup__button" type="submit">Создать</button>
+          <button class="popup__button popup__button_active" type="submit">Создать</button>
         </form>
         <button class="popup__close popup__close_type_new-card" type="button" aria-label="Закрыть форму"></button>
       </div>
@@ -68,26 +68,27 @@
 
 
     <div class="popup popup_type_image">
-        <figure class="photo">
-          <img class ="photo__item" src="#">
-          <figcaption class="photo__subtitle"></figcaption>
-          <button class="popup__close popup__close_type_image" type="button" aria-label="Закрыть форму"></button>
+      <figure class="photo">
+        <button class="photo__close" type="button" aria-label="Закрыть форму"></button>
+        <img class="photo__item" src="#" alt="">
+        <figcaption class="photo__subtitle"></figcaption>
+      </figure>
     </div>
 
     <template id="element-template">
       <li class="element">
-        <img class="element__photo" src="#">
+        <img class="element__photo" src="#" alt="">
         <button class="element__delete-icon" type="button" aria-label="Удалить"></button>
         <div class="element__footer">
           <h2 class="element__subtitle"></h2>
           <button class="element__like" type="button" aria-label="Лайк"></button>
-
         </div>
       </li>
     </template>
 
 
-  <script src="./scripts/script.js"></script>
+    <script src="./scripts/script.js"></script>
+  </div>
 </body>
 
 </html>
