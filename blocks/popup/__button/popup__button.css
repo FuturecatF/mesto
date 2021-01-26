@@ -14,12 +14,30 @@
   line-height: 22px;
   text-align: center;
   outline: 0;
-  background-color: #ebebeb;
+  background-color: #000000;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 425px) {
   .popup__button {
     margin-top: 45px;
     height: 46px;
+  }
+}
+
+
+.popup__button:focus {
+  opacity: .8;
+}
+
+@media (hover: hover) {
+  .popup__button:hover {
+    opacity: .8;
+  }
+}
+
+@media (hover: none) {
+  .popup__button:active {
+    opacity: .8;
   }
 }

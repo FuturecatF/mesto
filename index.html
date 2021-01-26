@@ -45,9 +45,9 @@
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" name="popup-form">
-          <input class="popup__input" type="text" name="profile-name" maxlength="25">
-          <input class="popup__input" type="text" name="profile-job" maxlength="45">
-          <button class="popup__button" type="submit" disabled>Сохранить</button>
+          <input class="popup__input popup__input_type_profile-name" type="text" name="profile-name" maxlength="25">
+          <input class="popup__input popup__input_type_profile-job" type="text" name="profile-job" maxlength="45">
+          <button class="popup__button" type="submit">Сохранить</button>
         </form>
         <button class="popup__close popup__close_type_edit" type="button" aria-label="Закрыть форму"></button>
       </div>
@@ -58,9 +58,9 @@
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
         <form class="popup__form" name="popup-form">
-          <input class="popup__input" type="text" name="title-name" placeholder="Название">
-          <input class="popup__input" type="text" name="photo-link" placeholder="Ссылка на картинку">
-          <button class="popup__button popup__button_active" type="submit">Создать</button>
+          <input class="popup__input popup__input_type_card-name" type="text" name="card-name" placeholder="Название">
+          <input class="popup__input popup__input_type_card-link" type="text" name="card-link" autocomplete="on" placeholder="Ссылка на картинку">
+          <button class="popup__button" type="submit">Создать</button>
         </form>
         <button class="popup__close popup__close_type_new-card" type="button" aria-label="Закрыть форму"></button>
       </div>
