@@ -5,7 +5,6 @@ const popupForm = popupEdit.querySelector('.popup__form');
 const popupButton = popupForm.querySelector('.popup__button');
 const popupCloseEdit = popupEdit.querySelector('.popup__close_type_edit');
 const popupCloseNewCard = popupNewCard.querySelector('.popup__close_type_new-card');
-const popupClose = popupPhoto.querySelector('.popup__close');
 const photoCloseImage = popupPhoto.querySelector('.photo__close');
 const profileName = popupEdit.querySelector('.popup__input_type_profile-name');
 const profileJob = popupEdit.querySelector('.popup__input_type_profile-job');
@@ -87,10 +86,10 @@ function likeCard(evt) {
 }
 
 function addCard(evt) {
-    popupPhoto.classList.add('popup_opened');
     photoItem.src = evt.target.src;
     subtitlePhoto.textContent = evt.target.alt;
     photoItem.alt = evt.target.alt;
+    toogleModal(popupPhoto);
 }
 
 function deleteCard (evt) {
@@ -107,7 +106,6 @@ function renderNewCard(data) {
 
 function submitNewCard(evt) {
   evt.preventDefault();
-  popupButton.classList.add('popup__button_active');
   const data = {};
   data.name = titleName.value;
   data.link = photoLink.value;
