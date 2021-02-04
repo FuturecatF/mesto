@@ -66,14 +66,12 @@ photoCloseImage.addEventListener('click', () => {
 buttonEdit.addEventListener('click', () => {
   toogleModal(popupEdit);
   takeInputValue();
+  enableValidation(selectors);
 });
 
 cardAdd.addEventListener('click', () => {
   toogleModal(popupNewCard);
-  const buttonCard = popupNewCard.querySelector('.popup__button');
-  buttonCard.setAttribute("disabled", "true");
-  buttonCard.classList.add('popup__button_disabled');
-
+  enableValidation(selectors);
 });
 
 function takeInputValue() {
