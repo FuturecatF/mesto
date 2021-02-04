@@ -20,25 +20,36 @@ const elementTemplate = document.querySelector('#element-template').content;
 
 function toogleModal(modal) {
   modal.classList.toggle('popup_opened');
-  modal.addEventListener('click', handleMouseClick);
 }
 
 function handleEscapeKey(evt) {
   const popupOpened = document.querySelector('.popup_opened');
-  if (evt.key === 'Escape') {
-    toogleModal(popupOpened);
-  }
-}
-
-function handleMouseClick(evt) {
-  const popupOpened = document.querySelector('.popup_opened');
-  if (evt.target.classList.contains('popup')) {
-    toogleModal(popupOpened);
+  if (document.contains(popupOpened)) {
+    if (evt.key === 'Escape') {
+      toogleModal(popupOpened);
+    }
   }
 }
 
 document.addEventListener('keydown', handleEscapeKey);
 
+popupEdit.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('popup_opened')) {
+    toogleModal(popupEdit);
+  }
+});
+
+popupNewCard.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('popup_opened')) {
+    toogleModal(popupNewCard);
+  }
+});
+
+popupPhoto.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('popup_opened')) {
+    toogleModal(popupPhoto);
+  }
+});
 
 popupCloseEdit.addEventListener('click', () => {
   toogleModal(popupEdit);
@@ -59,9 +70,10 @@ buttonEdit.addEventListener('click', () => {
 
 cardAdd.addEventListener('click', () => {
   toogleModal(popupNewCard);
-  clearValue();
+  const buttonCard = popupNewCard.querySelector('.popup__button');
+  buttonCard.setAttribute("disabled", true);
+  buttonCard.classList.add('popup__button_disabled');
 });
-
 
 function takeInputValue() {
   profileName.value = profileTitle.textContent;
@@ -82,19 +94,19 @@ initialCards.forEach(renderCard);
 
 function getCard(data) {
   const card = elementTemplate.cloneNode(true);
+  const cardPhoto = card.querySelector('.element__photo');
   card.querySelector('.element__subtitle').textContent = data.name;
-  card.querySelector('.element__photo').src = data.link;
-  card.querySelector('.element__photo').alt = data.name;
+  cardPhoto.src = data.link;
+  cardPhoto.alt = data.name;
+  cardPhoto.addEventListener('click', function (evt) {
+    addCard(evt);
+  });
   card.querySelector('.element__like').addEventListener('click', function (evt) {
     likeCard(evt);
-  });
-  card.querySelector('.element__photo').addEventListener('click', function (evt) {
-    addCard(evt);
   });
   card.querySelector('.element__delete-icon').addEventListener('click', function (evt) {
     deleteCard(evt);
   });
-
   return card;
 }
 
@@ -128,11 +140,7 @@ function submitNewCard(evt) {
   data.link = photoLink.value;
   renderNewCard(data);
   toogleModal(popupNewCard);
-}
-
-function clearValue() {
-  photoLink.value = '';
-  titleName.value = '';
+  document.querySelector('#form-new-card').reset();
 }
 
 popupNewCard.addEventListener('submit', submitNewCard);

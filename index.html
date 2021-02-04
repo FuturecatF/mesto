@@ -66,7 +66,7 @@
     <div class="popup popup_type_new-card">
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form" name="popup-form" novalidate>
+        <form class="popup__form" id="form-new-card" name="popup-form" novalidate>
           <input class="popup__input popup__input_type_card-name" type="text" id="card-name" name="image-name"
             placeholder="Название" minlength="2" maxlength="30" required>
           <div class="popup__error-container">
@@ -77,7 +77,7 @@
           <div class="popup__error-container">
             <span class="popup__input-error" id="card-link-error"></span>
           </div>
-          <button class="popup__button" type="submit">Создать</button>
+          <button class="popup__button" type="submit" disabled>Создать</button>
         </form>
         <button class="popup__close popup__close_type_new-card" type="button" aria-label="Закрыть форму"></button>
       </div>
@@ -106,6 +106,7 @@
     <script src="./scripts/initial-cards.js"></script>
     <script src="./scripts/script.js"></script>
     <script src="./scripts/validate.js"></script>
+
   </div>
 </body>
 
