@@ -71,8 +71,7 @@ buttonEdit.addEventListener('click', () => {
 cardAdd.addEventListener('click', () => {
   toogleModal(popupNewCard);
   const buttonCard = popupNewCard.querySelector('.popup__button');
-  buttonCard.setAttribute("disabled", true);
-  buttonCard.classList.add('popup__button_disabled');
+  toggleButtonState(true, buttonCard, selectors);
 });
 
 function takeInputValue() {
