@@ -1,8 +1,7 @@
 const popupEdit = document.querySelector('.popup_type_edit');
 const popupNewCard = document.querySelector('.popup_type_new-card');
 const popupPhoto = document.querySelector('.popup_type_image');
-const popupForm = popupEdit.querySelector('.popup__form');
-const popupButton = popupForm.querySelector('.popup__button');
+const popupForm = document.querySelector('.popup__form');
 const popupCloseEdit = popupEdit.querySelector('.popup__close_type_edit');
 const popupCloseNewCard = popupNewCard.querySelector('.popup__close_type_new-card');
 const photoCloseImage = popupPhoto.querySelector('.photo__close');
@@ -21,7 +20,25 @@ const elementTemplate = document.querySelector('#element-template').content;
 
 function toogleModal(modal) {
   modal.classList.toggle('popup_opened');
+  modal.addEventListener('click', handleMouseClick);
 }
+
+function handleEscapeKey(evt) {
+  const popupOpened = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
+    toogleModal(popupOpened);
+  }
+}
+
+function handleMouseClick(evt) {
+  const popupOpened = document.querySelector('.popup_opened');
+  if (evt.target.classList.contains('popup')) {
+    toogleModal(popupOpened);
+  }
+}
+
+document.addEventListener('keydown', handleEscapeKey);
+
 
 popupCloseEdit.addEventListener('click', () => {
   toogleModal(popupEdit);
@@ -86,13 +103,13 @@ function likeCard(evt) {
 }
 
 function addCard(evt) {
-    photoItem.src = evt.target.src;
-    subtitlePhoto.textContent = evt.target.alt;
-    photoItem.alt = evt.target.alt;
-    toogleModal(popupPhoto);
+  photoItem.src = evt.target.src;
+  subtitlePhoto.textContent = evt.target.alt;
+  photoItem.alt = evt.target.alt;
+  toogleModal(popupPhoto);
 }
 
-function deleteCard (evt) {
+function deleteCard(evt) {
   evt.target.closest('.element').remove();
 }
 

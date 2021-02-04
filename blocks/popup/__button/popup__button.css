@@ -3,7 +3,7 @@
   height: 50px;
   align-self: center;
   color: white;
-  margin-top: 48px;
+  margin-top: 12px;
   border: none;
   border-radius: 2px;
   padding-top: 14px;
@@ -20,7 +20,7 @@
 
 @media screen and (max-width: 425px) {
   .popup__button {
-    margin-top: 45px;
+    margin-top: 9px;
     height: 46px;
   }
 }

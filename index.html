@@ -44,9 +44,18 @@
     <div class="popup popup_type_edit">
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="popup-form">
-          <input class="popup__input popup__input_type_profile-name" type="text" name="profile-name" maxlength="25">
-          <input class="popup__input popup__input_type_profile-job" type="text" name="profile-job" maxlength="45">
+        <form class="popup__form" name="popup-form" novalidate>
+          <input class="popup__input popup__input_type_profile-name" type="text" id="profile-name" name="name"
+            minlength="2" maxlength="40" placeholder="Имя" required>
+          <div class="popup__error-container">
+            <span class="popup__input-error" id="profile-name-error"></span>
+          </div>
+
+          <input class="popup__input popup__input_type_profile-job" type="text" id="profile-job" name="job"
+            minlength="2" maxlength="200" placeholder="О себе" required>
+          <div class="popup__error-container">
+            <span class="popup__input-error" id="profile-job-error"></span>
+          </div>
           <button class="popup__button" type="submit">Сохранить</button>
         </form>
         <button class="popup__close popup__close_type_edit" type="button" aria-label="Закрыть форму"></button>
@@ -57,9 +66,17 @@
     <div class="popup popup_type_new-card">
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form" name="popup-form">
-          <input class="popup__input popup__input_type_card-name" type="text" name="card-name" placeholder="Название">
-          <input class="popup__input popup__input_type_card-link" type="text" name="card-link" autocomplete="on" placeholder="Ссылка на картинку">
+        <form class="popup__form" name="popup-form" novalidate>
+          <input class="popup__input popup__input_type_card-name" type="text" id="card-name" name="image-name"
+            placeholder="Название" minlength="2" maxlength="30" required>
+          <div class="popup__error-container">
+            <span class="popup__input-error" id="card-name-error"></span>
+          </div>
+          <input class="popup__input popup__input_type_card-link" type="url" id="card-link" name="link"
+            autocomplete="on" placeholder="Ссылка на картинку" required>
+          <div class="popup__error-container">
+            <span class="popup__input-error" id="card-link-error"></span>
+          </div>
           <button class="popup__button" type="submit">Создать</button>
         </form>
         <button class="popup__close popup__close_type_new-card" type="button" aria-label="Закрыть форму"></button>
@@ -88,6 +105,7 @@
 
     <script src="./scripts/initial-cards.js"></script>
     <script src="./scripts/script.js"></script>
+    <script src="./scripts/validate.js"></script>
   </div>
 </body>
 
