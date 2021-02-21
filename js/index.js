@@ -1,3 +1,23 @@
+import { Card } from './Card.js';
+import { initialCards } from './initial-cards.js';
+import { FormValidator } from './FormValidator.js';
+
+export {
+  popupPhoto,
+  toogleModal,
+  photoItem,
+  subtitlePhoto
+}
+
+const selectors = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active',
+};
+
 const popupEdit = document.querySelector('.popup_type_edit');
 const popupNewCard = document.querySelector('.popup_type_new-card');
 const popupPhoto = document.querySelector('.popup_type_image');
@@ -16,7 +36,16 @@ const subtitlePhoto = popupPhoto.querySelector('.photo__subtitle');
 const titleName = popupNewCard.querySelector('.popup__input_type_card-name');
 const photoLink = popupNewCard.querySelector('.popup__input_type_card-link');
 const cardAdd = document.querySelector('.profile__add-button');
-const elementTemplate = document.querySelector('#element-template').content;
+
+function validationProfile() {
+  const formProfile = new FormValidator(selectors, popupEdit);
+  formProfile.enableValidation();
+}
+
+function validationCard() {
+  const formCardsAdd = new FormValidator(selectors, popupNewCard);
+  formCardsAdd.enableValidation();
+}
 
 function toogleModal(modal) {
   modal.classList.toggle('popup_opened');
@@ -61,12 +90,12 @@ photoCloseImage.addEventListener('click', () => {
 buttonEdit.addEventListener('click', () => {
   toogleModal(popupEdit);
   takeInputValue();
-  enableValidation(selectors);
+  validationProfile();
 });
 
 cardAdd.addEventListener('click', () => {
+  validationCard();
   toogleModal(popupNewCard);
-  enableValidation(selectors);
 });
 
 function takeInputValue() {
@@ -74,67 +103,31 @@ function takeInputValue() {
   profileJob.value = profileSubtitle.textContent;
 }
 
-function handleFormSubmit(evt) {
+function handleFormProfileSubmit(evt) {
   evt.preventDefault();
   profileTitle.textContent = profileName.value;
   profileSubtitle.textContent = profileJob.value;
   toogleModal(popupEdit);
 }
 
-popupForm.addEventListener('submit', handleFormSubmit);
+popupForm.addEventListener('submit', handleFormProfileSubmit);
 
-initialCards.forEach(renderCard);
+initialCards.forEach((item) => {
+  const card = new Card(item, '#element-template');
+  const cardElement = card.generateCard();
+  elementsContainer.append(cardElement);
+});
 
-
-function getCard(data) {
-  const card = elementTemplate.cloneNode(true);
-  const cardPhoto = card.querySelector('.element__photo');
-  card.querySelector('.element__subtitle').textContent = data.name;
-  cardPhoto.src = data.link;
-  cardPhoto.alt = data.name;
-  cardPhoto.addEventListener('click', function (evt) {
-    openBigImage(evt);
-  });
-  card.querySelector('.element__like').addEventListener('click', function (evt) {
-    likeCard(evt);
-  });
-  card.querySelector('.element__delete-icon').addEventListener('click', function (evt) {
-    deleteCard(evt);
-  });
-  return card;
-}
-
-function likeCard(evt) {
-  evt.target.classList.toggle('element__like_active');
-}
-
-function openBigImage(evt) {
-  photoItem.src = evt.target.src;
-  subtitlePhoto.textContent = evt.target.alt;
-  photoItem.alt = evt.target.alt;
-  toogleModal(popupPhoto);
-}
-
-function deleteCard(evt) {
-  evt.target.closest('.element').remove();
-}
-
-function renderCard(data) {
-  elementsContainer.append(getCard(data));
-}
-
-function renderNewCard(data) {
-  elementsContainer.prepend(getCard(data));
-}
-
-function submitNewCard(evt) {
+function handleFormCardSubmit(evt) {
   evt.preventDefault();
   const data = {};
   data.name = titleName.value;
   data.link = photoLink.value;
-  renderNewCard(data);
+  const card = new Card(data, '#element-template');
+  const cardElement = card.generateCard();
+  elementsContainer.prepend(cardElement);
   toogleModal(popupNewCard);
   document.querySelector('#form-new-card').reset();
 }
 
-popupNewCard.addEventListener('submit', submitNewCard);
+popupNewCard.addEventListener('submit', handleFormCardSubmit);
