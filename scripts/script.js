@@ -1,7 +1,7 @@
 const popupEdit = document.querySelector('.popup_type_edit');
 const popupNewCard = document.querySelector('.popup_type_new-card');
 const popupPhoto = document.querySelector('.popup_type_image');
-const popupForm = document.querySelector('.popup__form');
+const popupForm = popupEdit.querySelector('.popup__form');
 const popupCloseEdit = popupEdit.querySelector('.popup__close_type_edit');
 const popupCloseNewCard = popupNewCard.querySelector('.popup__close_type_new-card');
 const photoCloseImage = popupPhoto.querySelector('.photo__close');
@@ -31,25 +31,20 @@ function handleEscapeKey(evt) {
   }
 }
 
+function handleMouseClick(evt) {
+  const popupOpened = document.querySelector('.popup_opened');
+  if (evt.target.classList.contains('popup')) {
+    toogleModal(popupOpened);
+  }
+}
+
 document.addEventListener('keydown', handleEscapeKey);
 
-popupEdit.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('popup_opened')) {
-    toogleModal(popupEdit);
-  }
-});
+popupEdit.addEventListener('click', handleMouseClick);
 
-popupNewCard.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('popup_opened')) {
-    toogleModal(popupNewCard);
-  }
-});
+popupNewCard.addEventListener('click', handleMouseClick);
 
-popupPhoto.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('popup_opened')) {
-    toogleModal(popupPhoto);
-  }
-});
+popupPhoto.addEventListener('click', handleMouseClick);
 
 popupCloseEdit.addEventListener('click', () => {
   toogleModal(popupEdit);
@@ -98,7 +93,7 @@ function getCard(data) {
   cardPhoto.src = data.link;
   cardPhoto.alt = data.name;
   cardPhoto.addEventListener('click', function (evt) {
-    addCard(evt);
+    openBigImage(evt);
   });
   card.querySelector('.element__like').addEventListener('click', function (evt) {
     likeCard(evt);
@@ -113,7 +108,7 @@ function likeCard(evt) {
   evt.target.classList.toggle('element__like_active');
 }
 
-function addCard(evt) {
+function openBigImage(evt) {
   photoItem.src = evt.target.src;
   subtitlePhoto.textContent = evt.target.alt;
   photoItem.alt = evt.target.alt;
