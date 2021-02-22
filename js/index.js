@@ -109,13 +109,22 @@ function handleFormProfileSubmit(evt) {
   profileSubtitle.textContent = profileJob.value;
   toogleModal(popupEdit);
 }
+function handleAddCardPrepend(data) {
+  const card = new Card(data, '#element-template');
+  const cardElement = card.generateCard();
+  elementsContainer.prepend(cardElement);
+}
+
+function handleAddCardAppend(data) {
+  const card = new Card(data, '#element-template');
+  const cardElement = card.generateCard();
+  elementsContainer.append(cardElement);
+}
 
 popupForm.addEventListener('submit', handleFormProfileSubmit);
 
 initialCards.forEach((item) => {
-  const card = new Card(item, '#element-template');
-  const cardElement = card.generateCard();
-  elementsContainer.append(cardElement);
+  handleAddCardAppend(item);
 });
 
 function handleFormCardSubmit(evt) {
@@ -123,9 +132,7 @@ function handleFormCardSubmit(evt) {
   const data = {};
   data.name = titleName.value;
   data.link = photoLink.value;
-  const card = new Card(data, '#element-template');
-  const cardElement = card.generateCard();
-  elementsContainer.prepend(cardElement);
+  handleAddCardPrepend(data);
   toogleModal(popupNewCard);
   document.querySelector('#form-new-card').reset();
 }
