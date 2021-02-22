@@ -1,4 +1,4 @@
-import { toogleModal, popupPhoto, photoItem, subtitlePhoto } from './index.js';
+import { openBigImage } from './index.js';
 
 export class Card {
   constructor(data, cardSelector) {
@@ -17,12 +17,17 @@ export class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+    this._subtitleElement = this._element.querySelector('.element__subtitle');
+    this._photoElement = this._element.querySelector('.element__photo');
+    this._likeElement = this._element.querySelector('.element__like');
+    this._deleteButton = this._element.querySelector('.element__delete-icon');
     this._setEventListeners();
-    this._element.querySelector('.element__photo').src = this._link;
-    this._element.querySelector('.element__subtitle').textContent = this._name;
-    this._element.querySelector('.element__photo').alt = this._name;
+    this._photoElement.src = this._link;
+    this._subtitleElement.textContent = this._name;
+    this._photoElement.alt = this._name;
 
     return this._element;
+
   }
 
   _likeCard() {
@@ -33,16 +38,9 @@ export class Card {
     this.closest('.element').remove();
   }
 
-  _openBigImage() {
-    photoItem.src = this.src;
-    subtitlePhoto.textContent = this.alt;
-    photoItem.alt = this.alt;
-    toogleModal(popupPhoto);
-  }
-
   _setEventListeners() {
-    this._element.querySelector('.element__delete-icon').addEventListener('click', this._deleteCard);
-    this._element.querySelector('.element__photo').addEventListener('click', this._openBigImage);
-    this._element.querySelector('.element__like').addEventListener('click', this._likeCard);
+    this._deleteButton.addEventListener('click', this._deleteCard);
+    this._photoElement.addEventListener('click', openBigImage);
+    this._likeElement.addEventListener('click', this._likeCard);
   }
 }

@@ -2,12 +2,7 @@ import { Card } from './Card.js';
 import { initialCards } from './initial-cards.js';
 import { FormValidator } from './FormValidator.js';
 
-export {
-  popupPhoto,
-  toogleModal,
-  photoItem,
-  subtitlePhoto
-}
+export { openBigImage };
 
 const selectors = {
   formSelector: '.popup__form',
@@ -37,25 +32,31 @@ const titleName = popupNewCard.querySelector('.popup__input_type_card-name');
 const photoLink = popupNewCard.querySelector('.popup__input_type_card-link');
 const cardAdd = document.querySelector('.profile__add-button');
 
-function validationProfile() {
-  const formProfile = new FormValidator(selectors, popupEdit);
-  formProfile.enableValidation();
+const formProfile = new FormValidator(selectors, popupEdit);
+formProfile.enableValidation();
+const formCardsAdd = new FormValidator(selectors, popupNewCard);
+formCardsAdd.enableValidation();
+
+function openPopup(modal) {
+  modal.classList.add('popup_opened');
 }
 
-function validationCard() {
-  const formCardsAdd = new FormValidator(selectors, popupNewCard);
-  formCardsAdd.enableValidation();
+function closePopup(modal) {
+  modal.classList.remove('popup_opened');
 }
 
-function toogleModal(modal) {
-  modal.classList.toggle('popup_opened');
+function openBigImage() {
+  photoItem.src = this.src;
+  subtitlePhoto.textContent = this.alt;
+  photoItem.alt = this.alt;
+  openPopup(popupPhoto);
 }
 
 function handleEscapeKey(evt) {
   const popupOpened = document.querySelector('.popup_opened');
   if (document.contains(popupOpened)) {
     if (evt.key === 'Escape') {
-      toogleModal(popupOpened);
+      closePopup(popupOpened);
     }
   }
 }
@@ -63,7 +64,7 @@ function handleEscapeKey(evt) {
 function handleMouseClick(evt) {
   const popupOpened = document.querySelector('.popup_opened');
   if (evt.target.classList.contains('popup')) {
-    toogleModal(popupOpened);
+    closePopup(popupOpened);
   }
 }
 
@@ -76,26 +77,27 @@ popupNewCard.addEventListener('click', handleMouseClick);
 popupPhoto.addEventListener('click', handleMouseClick);
 
 popupCloseEdit.addEventListener('click', () => {
-  toogleModal(popupEdit);
+  closePopup(popupEdit);
 });
 
 popupCloseNewCard.addEventListener('click', () => {
-  toogleModal(popupNewCard);
+  closePopup(popupNewCard);
 });
 
 photoCloseImage.addEventListener('click', () => {
-  toogleModal(popupPhoto);
+  closePopup(popupPhoto);
 });
 
 buttonEdit.addEventListener('click', () => {
-  toogleModal(popupEdit);
   takeInputValue();
-  validationProfile();
+  formProfile.clearValidation();
+  openPopup(popupEdit);
 });
 
 cardAdd.addEventListener('click', () => {
-  validationCard();
-  toogleModal(popupNewCard);
+  clearInputValue();
+  formCardsAdd.clearValidation();
+  openPopup(popupNewCard);
 });
 
 function takeInputValue() {
@@ -103,22 +105,29 @@ function takeInputValue() {
   profileJob.value = profileSubtitle.textContent;
 }
 
+function clearInputValue() {
+  titleName.value = '';
+  photoLink.value = '';
+}
+
 function handleFormProfileSubmit(evt) {
   evt.preventDefault();
   profileTitle.textContent = profileName.value;
   profileSubtitle.textContent = profileJob.value;
-  toogleModal(popupEdit);
+  closePopup(popupEdit);
 }
-function handleAddCardPrepend(data) {
+
+function createCard(data) {
   const card = new Card(data, '#element-template');
-  const cardElement = card.generateCard();
-  elementsContainer.prepend(cardElement);
+  return card.generateCard();
+}
+
+function handleAddCardPrepend(data) {
+  elementsContainer.prepend(createCard(data));
 }
 
 function handleAddCardAppend(data) {
-  const card = new Card(data, '#element-template');
-  const cardElement = card.generateCard();
-  elementsContainer.append(cardElement);
+  elementsContainer.append(createCard(data));
 }
 
 popupForm.addEventListener('submit', handleFormProfileSubmit);
@@ -133,7 +142,7 @@ function handleFormCardSubmit(evt) {
   data.name = titleName.value;
   data.link = photoLink.value;
   handleAddCardPrepend(data);
-  toogleModal(popupNewCard);
+  closePopup(popupNewCard);
   document.querySelector('#form-new-card').reset();
 }
 
