@@ -31,18 +31,22 @@ const subtitlePhoto = popupPhoto.querySelector('.photo__subtitle');
 const titleName = popupNewCard.querySelector('.popup__input_type_card-name');
 const photoLink = popupNewCard.querySelector('.popup__input_type_card-link');
 const cardAdd = document.querySelector('.profile__add-button');
+const profileForm = popupEdit.querySelector('.popup__form_type_profile-form');
+const cardForm = popupNewCard.querySelector('.popup__form_type_card-form');
 
-const formProfile = new FormValidator(selectors, popupEdit);
+const formProfile = new FormValidator(selectors, profileForm);
 formProfile.enableValidation();
-const formCardsAdd = new FormValidator(selectors, popupNewCard);
+const formCardsAdd = new FormValidator(selectors, cardForm);
 formCardsAdd.enableValidation();
 
 function openPopup(modal) {
   modal.classList.add('popup_opened');
+  document.addEventListener('keydown', handleEscapeKey);
 }
 
 function closePopup(modal) {
   modal.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleEscapeKey);
 }
 
 function openBigImage() {
@@ -67,8 +71,6 @@ function handleMouseClick(evt) {
     closePopup(popupOpened);
   }
 }
-
-document.addEventListener('keydown', handleEscapeKey);
 
 popupEdit.addEventListener('click', handleMouseClick);
 
