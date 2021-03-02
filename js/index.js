@@ -144,7 +144,7 @@ function handleFormCardSubmit(evt) {
   data.name = titleName.value;
   data.link = photoLink.value;
   // handleAddCardPrepend(data);
-  closePopup(popupNewCard);
+ // closePopup(popupNewCard);
   document.querySelector('#form-new-card').reset();
 }
 
@@ -215,14 +215,14 @@ class Popup {
 }
 
 
-/*
+
 //класс PopupWithImage
 class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
   }
 }
-*/
+
 //класс PopupWithForm
 class PopupWithForm extends Popup {
   constructor(popupSelector,) {
@@ -239,5 +239,22 @@ class PopupWithForm extends Popup {
   }
 }
 //класс UserInfo
+class UserInfo {
+  constructor({ name, job}) {
+    this._name = name;
+    this._job = job;
+  }
 
+  getUserInfo() {
+    return {
+      name: this._name,
+      job: this._job,
+    }
+  }
+
+  setUserInfo() {
+
+  }
+
+}
 
