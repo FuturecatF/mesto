@@ -44,10 +44,10 @@ function openPopup(modal) {
   document.addEventListener('keydown', handleEscapeKey);
 }
 
-function closePopup(modal) {
+/* function closePopup(modal) {
   modal.classList.remove('popup_opened');
   document.removeEventListener('keydown', handleEscapeKey);
-}
+} */
 
 function openBigImage() {
   photoItem.src = this.src;
@@ -78,9 +78,9 @@ popupNewCard.addEventListener('click', handleMouseClick);
 
 popupPhoto.addEventListener('click', handleMouseClick);
 
-popupCloseEdit.addEventListener('click', () => {
+/* popupCloseEdit.addEventListener('click', () => {
   closePopup(popupEdit);
-});
+}); */
 
 popupCloseNewCard.addEventListener('click', () => {
   closePopup(popupNewCard);
@@ -190,17 +190,18 @@ const cardList = new Section({
 cardList.renderItems();
 //класс Popup
 
-/* class Popup {
+class Popup {
   constructor(popupSelector) {
     this._popupSelector = popupSelector;
+
   }
 
   open() {
-
+    this._popupSelector.classList.add('popup_opened');
   }
 
   close() {
-
+    this._popupSelector.classList.remove('popup_opened');
   }
 
   _handleEscClose() {
@@ -208,23 +209,35 @@ cardList.renderItems();
   }
 
   setEventListeners() {
-
+    const closeButton = this._popupSelector.querySelector('.popup__close');
+    closeButton.addEventListener('click', this.close)
   }
 }
 
+
+/*
 //класс PopupWithImage
 class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
   }
 }
-
+*/
 //класс PopupWithForm
 class PopupWithForm extends Popup {
-  constructor(popupSelector) {
+  constructor(popupSelector,) {
     super(popupSelector);
   }
+  _getInputValues() {
+
+  }
+  close() {
+
+  }
+  setEventListeners() {
+
+  }
 }
-//класс UserInfo */
+//класс UserInfo
 
 
