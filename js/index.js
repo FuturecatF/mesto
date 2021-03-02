@@ -119,33 +119,112 @@ function handleFormProfileSubmit(evt) {
   closePopup(popupEdit);
 }
 
-function createCard(data) {
-  const card = new Card(data, '#element-template');
-  return card.generateCard();
-}
+//function createCard(data) {
+// const card = new Card(data, '#element-template');
+//  return card.generateCard();
+//}
 
-function handleAddCardPrepend(data) {
+/* function handleAddCardPrepend(data) {
   elementsContainer.prepend(createCard(data));
 }
 
 function handleAddCardAppend(data) {
   elementsContainer.append(createCard(data));
-}
+} */
 
 popupForm.addEventListener('submit', handleFormProfileSubmit);
 
-initialCards.forEach((item) => {
+/* initialCards.forEach((item) => {
   handleAddCardAppend(item);
-});
+}); */
 
 function handleFormCardSubmit(evt) {
   evt.preventDefault();
   const data = {};
   data.name = titleName.value;
   data.link = photoLink.value;
-  handleAddCardPrepend(data);
+  // handleAddCardPrepend(data);
   closePopup(popupNewCard);
   document.querySelector('#form-new-card').reset();
 }
 
 popupNewCard.addEventListener('submit', handleFormCardSubmit);
+
+//ПРОЕКТ 8
+//класс Sectiom
+class Section {
+  constructor({ items, renderer }, containerSelector) {
+    this._renderedItems = items;
+    this._renderer = renderer;
+    this._container = containerSelector;
+  }
+
+  addItem(element) {
+    this._container.append(element);
+  }
+
+  addNewItem(element) {
+    this._container.prepend(element);
+  }
+
+  renderItems() {
+    this._renderedItems.forEach((item) => {
+      this._renderer(item);
+    });
+  }
+}
+
+function handleAddCard(item) {
+  const card = new Card(item, '#element-template');
+  const cardElement = card.generateCard();
+  return cardElement;
+}
+
+const cardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    cardList.addItem(handleAddCard(item));
+  }
+}, elementsContainer);
+
+cardList.renderItems();
+//класс Popup
+
+/* class Popup {
+  constructor(popupSelector) {
+    this._popupSelector = popupSelector;
+  }
+
+  open() {
+
+  }
+
+  close() {
+
+  }
+
+  _handleEscClose() {
+
+  }
+
+  setEventListeners() {
+
+  }
+}
+
+//класс PopupWithImage
+class PopupWithImage extends Popup {
+  constructor(popupSelector) {
+    super(popupSelector);
+  }
+}
+
+//класс PopupWithForm
+class PopupWithForm extends Popup {
+  constructor(popupSelector) {
+    super(popupSelector);
+  }
+}
+//класс UserInfo */
+
+
