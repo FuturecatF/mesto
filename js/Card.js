@@ -1,11 +1,9 @@
-import { openBigImage } from './index.js';
-
 export class Card {
-  constructor(data, cardSelector, openBigImage) {
+  constructor({ data, handleCardClick }, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
-    openBigImage;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -43,7 +41,9 @@ export class Card {
 
   _setEventListeners() {
     this._deleteButton.addEventListener('click', this._deleteCard);
-    this._photoElement.addEventListener('click', openBigImage);
     this._likeElement.addEventListener('click', this._likeCard);
+    this._photoElement.addEventListener('click', () => {
+      this._handleCardClick(this._name, this._link);
+  });
   }
 }
