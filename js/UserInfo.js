@@ -1,4 +1,3 @@
-import { profileName, profileJob } from './index.js'
 export class UserInfo {
   constructor({ name, job }) {
     this._name = name;
@@ -6,12 +5,14 @@ export class UserInfo {
   }
 
   getUserInfo() {
-    profileName.value = this._name.textContent;
-    profileJob.value = this._job.textContent;
+    return {
+    name: this._name.textContent,
+    job: this._job.textContent
+  }
   }
 
-  setUserInfo() {
-    this._name.textContent = profileName.value;
-    this._job.textContent = profileJob.value;
+  setUserInfo({ name, job }) {
+    this._name.textContent = name;
+    this._job.textContent = job;
   }
 }

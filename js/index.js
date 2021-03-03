@@ -23,8 +23,8 @@ const popupForm = popupEdit.querySelector('.popup__form');
 const popupCloseEdit = popupEdit.querySelector('.popup__close_type_edit');
 const popupCloseNewCard = popupNewCard.querySelector('.popup__close_type_new-card');
 const photoCloseImage = popupPhoto.querySelector('.photo__close');
-export const profileName = popupEdit.querySelector('.popup__input_type_profile-name');
-export const profileJob = popupEdit.querySelector('.popup__input_type_profile-job');
+const profileName = popupEdit.querySelector('.popup__input_type_profile-name');
+const profileJob = popupEdit.querySelector('.popup__input_type_profile-job');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 const buttonEdit = document.querySelector('.profile__edit-button');
@@ -94,15 +94,30 @@ popupPhoto.addEventListener('click', handleMouseClick); */
   closePopup(popupPhoto);
 }); */
 
-const popupFormEdit = new PopupWithForm(popupEdit, handleFormProfileSubmit);
+
+
+const popupFormEdit = new PopupWithForm(popupEdit, {
+  handleFormSubmit: (input) => {
+    const data = {
+      name: input['name'],
+      job: input['job']
+    }
+    userInfo.setUserInfo(data);
+    popupFormEdit.close();
+  }
+});
 popupFormEdit.setEventListeners();
+
 const popupFormAddCard = new PopupWithForm(popupNewCard, handleFormCardSubmit);
 popupFormAddCard.setEventListeners();
 
 const userInfo = new UserInfo({ name: profileTitle, job: profileSubtitle });
 
 buttonEdit.addEventListener('click', () => {
-  userInfo.getUserInfo();
+  const userData = userInfo.getUserInfo();
+  profileName.value = userData.name;
+  profileJob.value = userData.job;
+
   formProfile.clearValidation();
   popupFormEdit.open();
 
@@ -124,11 +139,11 @@ function clearInputValue() {
   photoLink.value = '';
 }
 
-function handleFormProfileSubmit(evt) {
+/* function handleFormProfileSubmit(evt) {
   evt.preventDefault();
   userInfo.setUserInfo();
   popupFormEdit.close();
-}
+} */
 
 //function createCard(data) {
 // const card = new Card(data, '#element-template');

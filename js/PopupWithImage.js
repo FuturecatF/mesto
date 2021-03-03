@@ -4,8 +4,8 @@ export class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
   }
-  open(name, link) {
 
+  open(name, link) {
     photoItem.src = link;
     subtitlePhoto.textContent = name;
     photoItem.alt = name;
