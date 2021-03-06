@@ -6,9 +6,9 @@ export class UserInfo {
 
   getUserInfo() {
     return {
-    name: this._name.textContent,
-    job: this._job.textContent
-  }
+      name: this._name.textContent,
+      job: this._job.textContent
+    }
   }
 
   setUserInfo({ name, job }) {

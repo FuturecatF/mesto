@@ -8,10 +8,10 @@ export class Card {
 
   _getTemplate() {
     const cardElement = document
-    .querySelector(this._cardSelector)
-    .content
-    .querySelector('.element')
-    .cloneNode(true);
+      .querySelector(this._cardSelector)
+      .content
+      .querySelector('.element')
+      .cloneNode(true);
 
     return cardElement;
   }
@@ -28,7 +28,6 @@ export class Card {
     this._photoElement.alt = this._name;
 
     return this._element;
-
   }
 
   _likeCard() {
@@ -44,6 +43,6 @@ export class Card {
     this._likeElement.addEventListener('click', this._likeCard);
     this._photoElement.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
-  });
+    });
   }
 }

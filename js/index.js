@@ -42,145 +42,45 @@ formProfile.enableValidation();
 const formCardsAdd = new FormValidator(selectors, cardForm);
 formCardsAdd.enableValidation();
 
-
-/* function openPopup(modal) {
-  modal.classList.add('popup_opened');
-  document.addEventListener('keydown', handleEscapeKey);
-} */
-
-/* function closePopup(modal) {
-  modal.classList.remove('popup_opened');
-  document.removeEventListener('keydown', handleEscapeKey);
-} */
-
-const popupWithImage = new PopupWithImage(popupPhoto);
-popupWithImage.setEventListeners();
-
-/* function handleCardClick() {
- openImage.open();
-} */
-
-/* function handleEscapeKey(evt) {
-  const popupOpened = document.querySelector('.popup_opened');
-  if (document.contains(popupOpened)) {
-    if (evt.key === 'Escape') {
-      closePopup(popupOpened);
-    }
-  }
-} */
-
-/* function handleMouseClick(evt) {
-  const popupOpened = document.querySelector('.popup_opened');
-  if (evt.target.classList.contains('popup')) {
-    closePopup(popupOpened);
-  }
-} */
-
-/* popupEdit.addEventListener('click', handleMouseClick);
-
-popupNewCard.addEventListener('click', handleMouseClick);
-
-popupPhoto.addEventListener('click', handleMouseClick); */
-
-/* popupCloseEdit.addEventListener('click', () => {
-  closePopup(popupEdit);
-}); */
-
-/* popupCloseNewCard.addEventListener('click', () => {
-  closePopup(popupNewCard);
-}); */
-
-/* photoCloseImage.addEventListener('click', () => {
-  closePopup(popupPhoto);
-}); */
-
-
-
 const popupFormEdit = new PopupWithForm(popupEdit, {
   handleFormSubmit: (input) => {
     const data = {
       name: input['name'],
       job: input['job']
     }
+
     userInfo.setUserInfo(data);
     popupFormEdit.close();
   }
 });
 popupFormEdit.setEventListeners();
 
-const popupFormAddCard = new PopupWithForm(popupNewCard, handleFormCardSubmit);
+const popupFormAddCard = new PopupWithForm(popupNewCard, {
+  handleFormSubmit: (input) => {
+    const data = {
+      name: input['image-name'],
+      link: input['link']
+    }
+    cardList.addNewItem(handleAddCard(data));
+    popupFormAddCard.close();
+  }
+});
 popupFormAddCard.setEventListeners();
 
 const userInfo = new UserInfo({ name: profileTitle, job: profileSubtitle });
 
 buttonEdit.addEventListener('click', () => {
-  const userData = userInfo.getUserInfo();
-  profileName.value = userData.name;
-  profileJob.value = userData.job;
-
+  profileName.value = userInfo.getUserInfo().name;
+  profileJob.value = userInfo.getUserInfo().job;
   formProfile.clearValidation();
   popupFormEdit.open();
 
 });
 
 cardAdd.addEventListener('click', () => {
-  clearInputValue();
   formCardsAdd.clearValidation();
   popupFormAddCard.open();
 });
-
-/* function takeInputValue() {
-  profileName.value = profileTitle.textContent;
-  profileJob.value = profileSubtitle.textContent;
-} */
-
-function clearInputValue() {
-  titleName.value = '';
-  photoLink.value = '';
-}
-
-/* function handleFormProfileSubmit(evt) {
-  evt.preventDefault();
-  userInfo.setUserInfo();
-  popupFormEdit.close();
-} */
-
-//function createCard(data) {
-// const card = new Card(data, '#element-template');
-//  return card.generateCard();
-//}
-
-/* function handleAddCardPrepend(data) {
-  elementsContainer.prepend(createCard(data));
-}
-
-function handleAddCardAppend(data) {
-  elementsContainer.append(createCard(data));
-} */
-
-//popupForm.addEventListener('submit', handleFormProfileSubmit);
-
-/* initialCards.forEach((item) => {
-  handleAddCardAppend(item);
-}); */
-
-function handleFormCardSubmit(evt) {
-  evt.preventDefault();
-  const item = {};
-  item.name = titleName.value;
-  item.link = photoLink.value;
-  // handleAddCardPrepend(data);
-  // closePopup(popupNewCard);
-  cardList.addNewItem(handleAddCard(item));
-  //document.querySelector('#form-new-card').reset();
-  popupFormAddCard.close();
-}
-
-//popupNewCard.addEventListener('submit', handleFormCardSubmit);
-
-//ПРОЕКТ 8
-//класс Sectiom
-
 
 function handleAddCard(item) {
   const card = new Card({
@@ -201,13 +101,6 @@ const cardList = new Section({
 }, elementsContainer);
 
 cardList.renderItems();
-//класс Popup
 
-
-
-
-
-
-//класс UserInfo
 
 
