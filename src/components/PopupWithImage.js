@@ -1,25 +1,15 @@
 import { Popup } from '../components/Popup.js';
-import { photoItem, subtitlePhoto } from '../utils/constants.js'
 export class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
+    this._photo = this._popupSelector.querySelector('.photo__item');
+    this._subtitle = this._popupSelector.querySelector('.photo__subtitle');
   }
 
   open(name, link) {
-    photoItem.src = link;
-    subtitlePhoto.textContent = name;
-    photoItem.alt = name;
+    this._photo.src = link;
+    this._subtitle.textContent = name;
+    this._photo.alt = name;
     super.open();
-  }
-
-  //переопределил setEventListeners, кнопка закрытия формы и попапа с картинкой разные.
-  setEventListeners() {
-    const closeButton = this._popupSelector.querySelector('.photo__close');
-    closeButton.addEventListener('click', () => this.close());
-    this._popupSelector.addEventListener('click', (evt) => {
-      if (evt.target.classList.contains('popup_opened')) {
-        this.close();
-      }
-    });
   }
 }

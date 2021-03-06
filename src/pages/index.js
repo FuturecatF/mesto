@@ -48,7 +48,7 @@ const popupFormAddCard = new PopupWithForm(popupNewCard, {
       name: input['image-name'],
       link: input['link']
     }
-    cardList.addNewItem(handleAddCard(data));
+    cardList.addNewItem(createCard(data));
     popupFormAddCard.close();
   }
 });
@@ -72,7 +72,7 @@ cardAdd.addEventListener('click', () => {
   popupFormAddCard.open();
 });
 
-function handleAddCard(item) {
+function createCard(item) {
   const card = new Card({
     data: item,
     handleCardClick: (name, link) => {
@@ -88,7 +88,7 @@ function handleAddCard(item) {
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    cardList.addItem(handleAddCard(item));
+    cardList.addItem(createCard(item));
   }
 }, elementsContainer);
 
