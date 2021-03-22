@@ -1,12 +1,12 @@
 import '../pages/index.css';
 import '../index.html';
 import { Card } from '../components/Card.js';
-import { initialCards } from '../utils/initial-cards.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { Section } from '../components/Section.js';
 import { UserInfo } from '../components/UserInfo.js';
+import { Api } from '../components/Api.js';
 
 import {
   selectors,
@@ -24,18 +24,53 @@ import {
   cardForm,
 } from '../utils/constants.js'
 
+
+//9 ПРОЕКТ
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-21',
+  headers: {
+    authorization: '5f8b754d-d9bd-4968-8e18-8ef729e76020',
+    'content-type': 'application/json'
+  }
+});
+
+Promise.all([api.getUserProfile(), api.getInitialCards()])
+  .then(([data, initialCards]) => {
+    userInfo.setUserInfo(data);
+
+    const cardList = new Section({
+      items: initialCards,
+      renderer: (item) => {
+        cardList.addItem(createCard(item));
+      }
+    }, elementsContainer);
+
+    cardList.renderItems();
+
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+
+
+
+
+
+
+
+//9 ПРОЕКТ
+
+
 const formProfile = new FormValidator(selectors, profileForm);
 formProfile.enableValidation();
 const formCardsAdd = new FormValidator(selectors, cardForm);
 formCardsAdd.enableValidation();
 
 const popupFormEdit = new PopupWithForm(popupEdit, {
-  handleFormSubmit: (input) => {
-    const data = {
-      name: input['name'],
-      job: input['job']
-    }
-    userInfo.setUserInfo(data);
+  handleFormSubmit: (data) => {
+    api.setUserProfile(data).then(data => {
+      userInfo.setUserInfo(data);
+    });
     popupFormEdit.close();
   }
 });
@@ -43,15 +78,23 @@ const popupFormEdit = new PopupWithForm(popupEdit, {
 popupFormEdit.setEventListeners();
 
 const popupFormAddCard = new PopupWithForm(popupNewCard, {
-  handleFormSubmit: (input) => {
+  handleFormSubmit: (item) => {
     const data = {
-      name: input['image-name'],
-      link: input['link']
+      name: item['image-name'],
+      link: item['link']
     }
-    cardList.addNewItem(createCard(data));
+    api.postNewCard(data)
+      .then(item => {
+        elementsContainer.addNewItem(createCard(item));
+      })
+      .finally(() => {
+        elementsContainer.renderItems();
+      })
     popupFormAddCard.close();
   }
 });
+
+
 popupFormAddCard.setEventListeners();
 
 const popupWithImage = new PopupWithImage(popupPhoto);
@@ -85,14 +128,7 @@ function createCard(item) {
   return cardElement;
 }
 
-const cardList = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    cardList.addItem(createCard(item));
-  }
-}, elementsContainer);
 
-cardList.renderItems();
 
 
 
