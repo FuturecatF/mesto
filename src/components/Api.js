@@ -31,7 +31,7 @@ export class Api {
           return res.json();
         }
       })
-      .catch(error => console.log(error.message));
+      .catch(error => console.log(error));
   }
 
 
@@ -65,4 +65,17 @@ export class Api {
       .catch(error => console.log(error.message));
 
   }
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`,{
+      method: 'DELETE',
+      headers:  this._headers
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+    })
+    .catch(error => console.log(error.message));
+
+}
 }

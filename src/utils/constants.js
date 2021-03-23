@@ -18,3 +18,4 @@ export const elementsContainer = document.querySelector('.elements__container');
 export const cardAdd = document.querySelector('.profile__add-button');
 export const profileForm = popupEdit.querySelector('.popup__form_type_profile-form');
 export const cardForm = popupNewCard.querySelector('.popup__form_type_card-form');
+export const popupYesOnSubmit = document.querySelector('.popup_type_submit');

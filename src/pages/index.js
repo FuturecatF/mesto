@@ -4,6 +4,7 @@ import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupWithSubmit } from '../components/PopupWithSubmit.js';
 import { Section } from '../components/Section.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { Api } from '../components/Api.js';
@@ -22,6 +23,7 @@ import {
   cardAdd,
   profileForm,
   cardForm,
+  popupYesOnSubmit
 } from '../utils/constants.js'
 
 
@@ -38,10 +40,12 @@ Promise.all([api.getUserProfile(), api.getInitialCards()])
   .then(([data, initialCards]) => {
     userInfo.setUserInfo(data);
 
+
     const cardList = new Section({
       items: initialCards,
       renderer: (item) => {
         cardList.addItem(createCard(item));
+
       }
     }, elementsContainer);
 
@@ -87,9 +91,6 @@ const popupFormAddCard = new PopupWithForm(popupNewCard, {
       .then(item => {
         elementsContainer.addNewItem(createCard(item));
       })
-      .finally(() => {
-        elementsContainer.renderItems();
-      })
     popupFormAddCard.close();
   }
 });
@@ -115,14 +116,25 @@ cardAdd.addEventListener('click', () => {
   popupFormAddCard.open();
 });
 
+const popupWithSubmit = new PopupWithSubmit(popupYesOnSubmit);
+popupWithSubmit.setEventListeners();
+
 function createCard(item) {
   const card = new Card({
     data: item,
     handleCardClick: (name, link) => {
       popupWithImage.open(name, link);
-
+    },
+    handleDeleteClick: (cardId, element) => {
+      popupWithSubmit.open();
+      console.log(cardId);
+      api.deleteCard(cardId)
+        .then(() => {
+         element.remove();
+        })
     }
   }, '#element-template');
+
   const cardElement = card.generateCard();
 
   return cardElement;
