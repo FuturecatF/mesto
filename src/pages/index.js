@@ -76,10 +76,13 @@ const formAvatar = new FormValidator(selectors, avatarForm);
 formAvatar.enableValidation();
 
 const popupFormEdit = new PopupWithForm(popupEdit, {
-  handleFormSubmit: (data) => {
-
-    api.setUserProfile(data).then(data => {
-      userInfo.setUserInfo(data);
+  handleFormSubmit: (item) => {
+    const data = {
+      name: item['name'],
+      about: item['job']
+    }
+    api.setUserProfile(data).then(item => {
+      userInfo.setUserInfo(item);
     });
     popupFormEdit.close();
   }
@@ -93,6 +96,7 @@ const popupFormAddCard = new PopupWithForm(popupNewCard, {
       name: item['image-name'],
       link: item['link']
     }
+
     api.postNewCard(data)
       .then(item => {
         elementsContainer.addNewItem(createCard(item));
@@ -161,10 +165,12 @@ function createCard(item) {
 
 const popupAvatar = new PopupWithForm(avatarImagePopup, {
   handleFormSubmit: (item) => {
-console.log(item);
-    api.setUserAvatar(item)
+    const data = {
+      avatar: item['avatar-image'],
+    }
+    api.setUserAvatar(data)
     .then((item) => {
-      userInfo.setUserAvatarUrl(item);
+      userInfo.setUserInfo(item);
     })
   }
 });
