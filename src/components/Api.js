@@ -31,9 +31,8 @@ export class Api {
           return res.json();
         }
       })
-      .catch(error => console.log(error));
+      .catch(errors => console.log(errors._message));
   }
-
 
   getUserProfile() {
     return fetch(`${this._baseUrl}/users/me`, {
@@ -45,7 +44,7 @@ export class Api {
           return res.json();
         }
       })
-      .catch(error => console.log(error.message));
+      .catch(errors => console.log(errors._message));
   }
 
   setUserProfile(data) {
@@ -54,7 +53,7 @@ export class Api {
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
-        about: data.job
+        about: data.about
       })
     })
       .then(res => {
@@ -65,17 +64,60 @@ export class Api {
       .catch(error => console.log(error.message));
 
   }
-  deleteCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}`,{
-      method: 'DELETE',
-      headers:  this._headers
-    })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-    })
-    .catch(error => console.log(error.message));
 
-}
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .catch(error => console.log(error.message));
+
+  }
+
+  putLikeCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: 'PUT',
+      headers: this._headers
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .catch(error => console.log(error.message));
+  }
+
+  deleteLikeCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .catch(error => console.log(error.message));
+  }
+
+  setUserAvatar(data) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: data.avatar
+      })
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .catch(errors => console.log(errors._message));
+  }
 }

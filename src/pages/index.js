@@ -23,7 +23,11 @@ import {
   cardAdd,
   profileForm,
   cardForm,
-  popupYesOnSubmit
+  popupYesOnSubmit,
+  buttonProfileAvatar,
+  avatarImagePopup,
+  avatarForm,
+  porfileAvatar,
 } from '../utils/constants.js'
 
 
@@ -36,10 +40,9 @@ const api = new Api({
   }
 });
 
-Promise.all([api.getUserProfile(), api.getInitialCards()])
-  .then(([data, initialCards]) => {
+Promise.all([ api.getUserProfile(), api.getInitialCards() ])
+  .then(([ data, initialCards ]) => {
     userInfo.setUserInfo(data);
-
 
     const cardList = new Section({
       items: initialCards,
@@ -69,9 +72,12 @@ const formProfile = new FormValidator(selectors, profileForm);
 formProfile.enableValidation();
 const formCardsAdd = new FormValidator(selectors, cardForm);
 formCardsAdd.enableValidation();
+const formAvatar = new FormValidator(selectors, avatarForm);
+formAvatar.enableValidation();
 
 const popupFormEdit = new PopupWithForm(popupEdit, {
   handleFormSubmit: (data) => {
+
     api.setUserProfile(data).then(data => {
       userInfo.setUserInfo(data);
     });
@@ -101,11 +107,11 @@ popupFormAddCard.setEventListeners();
 const popupWithImage = new PopupWithImage(popupPhoto);
 popupWithImage.setEventListeners();
 
-const userInfo = new UserInfo({ name: profileTitle, job: profileSubtitle });
+const userInfo = new UserInfo({ name: profileTitle, about: profileSubtitle, avatar: porfileAvatar });
 
 buttonEdit.addEventListener('click', () => {
   profileName.value = userInfo.getUserInfo().name;
-  profileJob.value = userInfo.getUserInfo().job;
+  profileJob.value = userInfo.getUserInfo().about;
   formProfile.clearValidation();
   popupFormEdit.open();
 
@@ -130,8 +136,20 @@ function createCard(item) {
       console.log(cardId);
       api.deleteCard(cardId)
         .then(() => {
-         element.remove();
+          element.remove();
         })
+    },
+
+    handleLike: (cardId, element) => {
+      if (!element.querySelector('.element__like').classList.contains('element__like_active')) {
+        api.putLikeCard(cardId).then((data) => {
+          card.likeCard(element, data);
+        });
+      } else {
+        api.deleteLikeCard(cardId).then((data) => {
+          card.likeCard(element, data);
+        });
+      }
     }
   }, '#element-template');
 
@@ -141,6 +159,22 @@ function createCard(item) {
 }
 
 
+const popupAvatar = new PopupWithForm(avatarImagePopup, {
+  handleFormSubmit: (item) => {
+console.log(item);
+    api.setUserAvatar(item)
+    .then((item) => {
+      userInfo.setUserAvatarUrl(item);
+    })
+  }
+});
+
+popupAvatar.setEventListeners();
+
+buttonProfileAvatar.addEventListener('click', () => {
+  formAvatar.clearValidation();
+  popupAvatar.open();
+});
 
 
 
