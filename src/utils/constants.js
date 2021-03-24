@@ -23,3 +23,7 @@ export const popupYesOnSubmit = document.querySelector('.popup_type_submit');
 export const avatarImagePopup = document.querySelector('.popup_type_avatar');
 export const buttonProfileAvatar = document.querySelector('.profile__avatar-change');
 export const avatarForm = avatarImagePopup.querySelector('.popup__form_type_avatar-form');
+export const popupButtonYes = popupYesOnSubmit.querySelector('.popup__button_type_yes');
+export const popupButtonAvatar = avatarImagePopup.querySelector('.popup__button_type_avatar');
+export const buttonNewMesto = popupNewCard.querySelector('.popup__button_type_new-mesto');
+export const buttonProfileEdit = popupEdit.querySelector('.popup__button_type_edit-profile');

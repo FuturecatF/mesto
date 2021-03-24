@@ -8,6 +8,7 @@ import { PopupWithSubmit } from '../components/PopupWithSubmit.js';
 import { Section } from '../components/Section.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { Api } from '../components/Api.js';
+import { requestLoading } from '../utils/utils.js'
 
 import {
   selectors,
@@ -28,6 +29,10 @@ import {
   avatarImagePopup,
   avatarForm,
   porfileAvatar,
+  popupButtonAvatar,
+  buttonNewMesto,
+  buttonProfileEdit,
+  popupButtonYes,
 } from '../utils/constants.js'
 
 
@@ -40,8 +45,8 @@ const api = new Api({
   }
 });
 
-Promise.all([ api.getUserProfile(), api.getInitialCards() ])
-  .then(([ data, initialCards ]) => {
+Promise.all([api.getUserProfile(), api.getInitialCards()])
+  .then(([data, initialCards]) => {
     userInfo.setUserInfo(data);
 
     const cardList = new Section({
@@ -77,31 +82,42 @@ formAvatar.enableValidation();
 
 const popupFormEdit = new PopupWithForm(popupEdit, {
   handleFormSubmit: (item) => {
+    requestLoading(buttonProfileEdit, true, 'Сохранение...');
     const data = {
       name: item['name'],
       about: item['job']
     }
     api.setUserProfile(data).then(item => {
       userInfo.setUserInfo(item);
-    });
-    popupFormEdit.close();
+    })
+      .finally(() => {
+        requestLoading(buttonProfileEdit, true, 'Сохранить');
+        popupFormEdit.close();
+      })
   }
 });
 
 popupFormEdit.setEventListeners();
 
+
 const popupFormAddCard = new PopupWithForm(popupNewCard, {
   handleFormSubmit: (item) => {
+    requestLoading(buttonNewMesto, true, 'Сохранение...');
     const data = {
       name: item['image-name'],
       link: item['link']
     }
 
     api.postNewCard(data)
-      .then(item => {
-        elementsContainer.addNewItem(createCard(item));
+      .then(data => {
+        elementsContainer.addNewItem(createCard(data));
       })
-    popupFormAddCard.close();
+      .finally(() => {
+
+        requestLoading(buttonNewMesto, false, 'Создать');
+        popupFormAddCard.close();
+      })
+
   }
 });
 
@@ -137,11 +153,17 @@ function createCard(item) {
     },
     handleDeleteClick: (cardId, element) => {
       popupWithSubmit.open();
-      console.log(cardId);
-      api.deleteCard(cardId)
-        .then(() => {
-          element.remove();
-        })
+      popupButtonYes.addEventListener('click', () => {
+        popupWithSubmit.handleDeleteCard (() => {
+        api.deleteCard(cardId)
+          .then(() => {
+            element.remove();
+          })
+          .finally(() => {
+            popupWithSubmit.close();
+          })
+      })
+    })
     },
 
     handleLike: (cardId, element) => {
@@ -165,13 +187,18 @@ function createCard(item) {
 
 const popupAvatar = new PopupWithForm(avatarImagePopup, {
   handleFormSubmit: (item) => {
+    requestLoading(popupButtonAvatar, true, 'Сохранение...');
     const data = {
       avatar: item['avatar-image'],
     }
     api.setUserAvatar(data)
-    .then((item) => {
-      userInfo.setUserInfo(item);
-    })
+      .then((item) => {
+        userInfo.setUserInfo(item);
+      })
+      .finally(() => {
+        requestLoading(popupButtonAvatar, false, 'Сохранить');
+        popupAvatar.close();
+      })
   }
 });
 
