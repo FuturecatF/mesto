@@ -35,7 +35,7 @@ import {
   popupButtonYes,
 } from '../utils/constants.js'
 
-
+let userId = 0;
 //9 ПРОЕКТ
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-21',
@@ -47,13 +47,13 @@ const api = new Api({
 
 Promise.all([api.getUserProfile(), api.getInitialCards()])
   .then(([data, initialCards]) => {
-    userInfo.setUserInfo(data);
+    userInfo.setUserInfo(data)
+    userId = data._id;
 
     const cardList = new Section({
       items: initialCards,
       renderer: (item) => {
         cardList.addItem(createCard(item));
-
       }
     }, elementsContainer);
 
@@ -107,13 +107,11 @@ const popupFormAddCard = new PopupWithForm(popupNewCard, {
       name: item['image-name'],
       link: item['link']
     }
-
     api.postNewCard(data)
-      .then(data => {
-        elementsContainer.addNewItem(createCard(data));
+      .then(item => {
+        elementsContainer.prepend(createCard(item));
       })
       .finally(() => {
-
         requestLoading(buttonNewMesto, false, 'Создать');
         popupFormAddCard.close();
       })
@@ -134,7 +132,6 @@ buttonEdit.addEventListener('click', () => {
   profileJob.value = userInfo.getUserInfo().about;
   formProfile.clearValidation();
   popupFormEdit.open();
-
 });
 
 cardAdd.addEventListener('click', () => {
@@ -154,16 +151,18 @@ function createCard(item) {
     handleDeleteClick: (cardId, element) => {
       popupWithSubmit.open();
       popupButtonYes.addEventListener('click', () => {
-        popupWithSubmit.handleDeleteCard (() => {
-        api.deleteCard(cardId)
-          .then(() => {
-            element.remove();
-          })
-          .finally(() => {
-            popupWithSubmit.close();
-          })
+        popupWithSubmit.handleDeleteCard(() => {
+          requestLoading(popupButtonYes, true, 'Сохранение...');
+          api.deleteCard(cardId)
+            .then(() => {
+              element.remove();
+            })
+            .finally(() => {
+              requestLoading(popupButtonYes, false, 'Да')
+              popupWithSubmit.close();
+            })
+        })
       })
-    })
     },
 
     handleLike: (cardId, element) => {
@@ -177,7 +176,7 @@ function createCard(item) {
         });
       }
     }
-  }, '#element-template');
+  }, '#element-template', userId);
 
   const cardElement = card.generateCard();
 
