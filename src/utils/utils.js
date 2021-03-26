@@ -1,9 +1,9 @@
-export function requestLoading (button, isLoading, text) {
+export function requestLoading(button, isLoading, text) {
   if (isLoading) {
-      button.setAttribute('disabled', true)
-      button.textContent = text;
+    button.setAttribute('disabled', true)
+    button.textContent = text;
   } else {
-      button.removeAttribute('disabled')
-      button.textContent = text;
+    button.removeAttribute('disabled', false)
+    button.textContent = text;
   }
 }

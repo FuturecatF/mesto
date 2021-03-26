@@ -18,8 +18,4 @@ export class UserInfo {
     this._about.textContent = data.about;
     this._avatar.src = data.avatar;
   }
-
-  /* setUserAvatarUrl({ avatar }) {
-
-  } */
 }

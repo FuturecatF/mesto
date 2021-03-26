@@ -4,6 +4,7 @@
   justify-self: center;
 }
 
+
 @media screen and (max-width: 890px) {
   .profile__avatar-container {
     margin-right: 0;

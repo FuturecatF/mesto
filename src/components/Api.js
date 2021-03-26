@@ -12,9 +12,11 @@ export class Api {
       .then(res => {
         if (res.ok) {
           return res.json();
+        } else {
+          return Promise.reject(`Ошибка: ${res.status}`);
         }
       })
-      .catch(error => console.log(error.message));
+      .catch(err => console.log(err));
   }
 
   postNewCard(data) {
@@ -29,9 +31,11 @@ export class Api {
       .then(res => {
         if (res.ok) {
           return res.json();
+        } else {
+          return Promise.reject(`Ошибка: ${res.status}`);
         }
       })
-      .catch(errors => console.log(errors._message));
+      .catch(err => console.log(err));
   }
 
   getUserProfile() {
@@ -42,9 +46,11 @@ export class Api {
       .then(res => {
         if (res.ok) {
           return res.json();
+        } else {
+          return Promise.reject(`Ошибка: ${res.status}`);
         }
       })
-      .catch(errors => console.log(errors._message));
+      .catch(err => console.log(err));
   }
 
   setUserProfile(data) {
@@ -59,9 +65,11 @@ export class Api {
       .then(res => {
         if (res.ok) {
           return res.json();
+        } else {
+          return Promise.reject(`Ошибка: ${res.status}`);
         }
       })
-      .catch(error => console.log(error.message));
+      .catch(err => console.log(err));
 
   }
 
@@ -73,9 +81,11 @@ export class Api {
       .then(res => {
         if (res.ok) {
           return res.json();
+        } else {
+          return Promise.reject(`Ошибка: ${res.status}`);
         }
       })
-      .catch(error => console.log(error.message));
+      .catch(err => console.log(err));
 
   }
 
@@ -87,9 +97,11 @@ export class Api {
       .then(res => {
         if (res.ok) {
           return res.json();
+        } else {
+          return Promise.reject(`Ошибка: ${res.status}`);
         }
       })
-      .catch(error => console.log(error.message));
+      .catch(err => console.log(err));
   }
 
   deleteLikeCard(cardId) {
@@ -100,9 +112,11 @@ export class Api {
       .then(res => {
         if (res.ok) {
           return res.json();
+        } else {
+          return Promise.reject(`Ошибка: ${res.status}`);
         }
       })
-      .catch(error => console.log(error.message));
+      .catch(err => console.log(err));
   }
 
   setUserAvatar(data) {
@@ -116,8 +130,10 @@ export class Api {
       .then(res => {
         if (res.ok) {
           return res.json();
+        } else {
+          return Promise.reject(`Ошибка: ${res.status}`);
         }
       })
-      .catch(errors => console.log(errors._message));
+      .catch(err => console.log(err));
   }
 }

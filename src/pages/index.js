@@ -36,7 +36,7 @@ import {
 } from '../utils/constants.js'
 
 let userId = 0;
-//9 ПРОЕКТ
+
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-21',
   headers: {
@@ -63,15 +63,6 @@ Promise.all([api.getUserProfile(), api.getInitialCards()])
   .catch((err) => {
     console.log(err);
   })
-
-
-
-
-
-
-
-//9 ПРОЕКТ
-
 
 const formProfile = new FormValidator(selectors, profileForm);
 formProfile.enableValidation();

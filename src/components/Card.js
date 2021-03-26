@@ -1,5 +1,5 @@
 export class Card {
-  constructor({ data, handleCardClick, handleDeleteClick, handleLike}, cardSelector, userId) {
+  constructor({ data, handleCardClick, handleDeleteClick, handleLike }, cardSelector, userId) {
     this._name = data.name;
     this._link = data.link;
     this._like = data.likes;
@@ -39,12 +39,12 @@ export class Card {
       if (item._id === this._userId) {
         this._likeElement.classList.add('element__like_active');
       }
-  });
+    });
 
 
-     if (this._ownersId !== this._userId) {
+    if (this._ownersId !== this._userId) {
       this._deleteButton.setAttribute('style', 'display: none');
-  }
+    }
 
     return this._element;
   }
