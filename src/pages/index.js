@@ -86,9 +86,11 @@ const popupFormEdit = new PopupWithForm(popupEdit, {
       .catch((err) => {
         console.log(err);
       })
+      .then(() => {
+        popupFormEdit.close();
+      })
       .finally(() => {
         requestLoading(buttonProfileEdit, true, 'Сохранить');
-        popupFormEdit.close();
       })
   }
 });
@@ -110,9 +112,11 @@ const popupFormAddCard = new PopupWithForm(popupNewCard, {
       .catch((err) => {
         console.log(err);
       })
+      .then(() => {
+        popupFormAddCard.close();
+      })
       .finally(() => {
         requestLoading(buttonNewMesto, false, 'Создать');
-        popupFormAddCard.close();
       })
 
   }
@@ -159,9 +163,11 @@ function createCard(item) {
             .catch((err) => {
               console.log(err);
             })
+            .then(() => {
+              popupWithSubmit.close();
+            })
             .finally(() => {
               requestLoading(popupButtonYes, false, 'Да')
-              popupWithSubmit.close();
             })
         })
       })
@@ -202,9 +208,11 @@ const popupAvatar = new PopupWithForm(avatarImagePopup, {
       .catch((err) => {
         console.log(err);
       })
+      .then(() => {
+        popupAvatar.close();
+      })
       .finally(() => {
         requestLoading(popupButtonAvatar, false, 'Сохранить');
-        popupAvatar.close();
       })
   }
 });
