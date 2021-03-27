@@ -16,6 +16,4 @@ export class PopupWithSubmit extends Popup {
       this._formSubmit();
     });
   }
-
-
 }
