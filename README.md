@@ -13,8 +13,23 @@
 3. *работа с Figma*
 4. *использованы Git и Github*
 5. *Grid*
-6. *Верстка popup окна*
-7. *JavaScript*
+6. *JavaScript*
+7. *Fetch API*
+8. *модули Js*
+9. *Webpack*
+10. *Babel*
+
+
+## Развертывание проекта
+
+### Для разработки
+
+npm run dev
+
+### Для деплоя
+
+npm run deploy
+
 
 ## Планы по доработке проекта
 
